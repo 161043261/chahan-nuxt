@@ -5,7 +5,22 @@
 // import vueDevTools from "vite-plugin-vue-devtools";
 import tailwindcss from '@tailwindcss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import type { ViteConfig } from 'nuxt/schema'
 import { visualizer } from 'rollup-plugin-visualizer'
+
+export const viteConfig: ViteConfig = {
+  plugins: [
+    // vue(), // 不要用!
+    // vueDevTools(), // 不要用!
+
+    // nuxt 使用 tailwindcss
+    // @ts-ignore
+    tailwindcss(),
+    // @ts-ignore
+    vueJsx(),
+    visualizer({ open: true }),
+  ],
+}
 
 // ~    /srcDir
 // @    /srcDir
@@ -40,22 +55,10 @@ export default defineNuxtConfig({
 
   // nuxt 使用 tailwindcss
   css: ['@/assets/css/tailwind.css'],
-  vite: {
-    plugins: [
-      // vue(), // 不要用!
-      // vueDevTools(), // 不要用!
-
-      // nuxt 使用 tailwindcss
-      // @ts-ignore
-      tailwindcss(),
-      vueJsx(),
-      visualizer({ open: true }),
-    ],
-  },
+  vite: viteConfig,
 
   // Nuxt 自带 postcss
   postcss: {
-    plugins: {
-    }
-  }
+    plugins: {},
+  },
 })
