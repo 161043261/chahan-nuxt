@@ -22,24 +22,23 @@ export const viteConfig: ViteConfig = {
   ],
 }
 
-// ~    /srcDir
-// @    /srcDir
-// ~~   /rootDir
-// @@   /rootDir
-
 // Nuxt 配置
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+
   typescript: {
     strict: true,
   },
+
   $production: {
     /** 生产环境的环境变量 */
   },
+
   $development: {
     /** 开发环境的环境变量 */
   },
+
   $meta: {
     /** 元数据 */
   },
@@ -53,12 +52,22 @@ export default defineNuxtConfig({
     },
   },
 
-  // nuxt 使用 tailwindcss
-  css: ['@/assets/css/tailwind.css'],
+  //! nuxt 使用 tailwindcss
+  //! 导入 element-plus 样式表
+  css: ['@/assets/css/tailwind.css', 'element-plus/dist/index.css'],
+
   vite: viteConfig,
 
   // Nuxt 自带 postcss
   postcss: {
     plugins: {},
   },
+
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+    // 开启布局过渡
+    layoutTransition: { name: "layout", mode: "out-in" },
+  },
+
+  modules: ['@pinia/nuxt'],
 })
