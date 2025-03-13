@@ -27,6 +27,8 @@ const addBaz = () => baz.value++
 
 const { clear, data, error, refresh, status } = await useFetch('/api/hello')
 console.log(data.value) // { hello: 'Nitro' }
+const { data: data2 } = await useFetch('/api/hello/Yukino')
+console.log(data2.value)
 </script>
 
 <template>
