@@ -31,6 +31,9 @@ export const viteConfig: ViteConfig = {
 
 // Nuxt 配置
 export default defineNuxtConfig({
+  imports: {
+    autoImport: false,
+  },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 

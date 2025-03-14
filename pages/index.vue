@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { definePageMeta } from '#imports';
+
 definePageMeta({
   layout: 'default', // 使用默认布局
 })
