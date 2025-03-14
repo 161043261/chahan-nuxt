@@ -47,14 +47,33 @@ export default defineNuxtConfig({
   // nuxt.config.ts 中定义的 runtimeConfig
   runtimeConfig: {
     // 只在服务器端可用的私有键
+    myServerToken: '',
+
     public: {
       // public 中的键在客户端也可用
+      myToken: '',
+    },
+
+    redis: {
+      host: '',
+      port: 0,
+    },
+
+    mongoose: {
+      uri: process.env.MONGODB_URI,
+      devtools: false,
+      options: {},
     },
   },
 
   //! nuxt 使用 tailwindcss
   //! 导入 element-plus 样式表
-  css: ['@/assets/css/tailwind.css', 'element-plus/dist/index.css'],
+  css: [
+    '~/assets/css/tailwind.css', // @
+    '~/assets/scss/global.scss', // @
+    'element-plus/dist/index.css',
+    'animate.css',
+  ],
 
   vite: viteConfig,
 
@@ -64,10 +83,10 @@ export default defineNuxtConfig({
   },
 
   app: {
-    pageTransition: { name: "page", mode: "out-in" },
+    pageTransition: { name: 'page', mode: 'out-in' },
     // 开启布局过渡
-    layoutTransition: { name: "layout", mode: "out-in" },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
 
-  modules: ['@pinia/nuxt'],
+  modules: ['@nuxt/eslint', 'nuxt-mongoose', '@pinia/nuxt'],
 })

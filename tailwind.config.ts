@@ -5,9 +5,6 @@ export default <Partial<Config>>{
   content: [],
   theme: {
     extend: {
-      // colors: {
-      //   primary: colors.green,
-      // },
     },
   },
   plugins: [],

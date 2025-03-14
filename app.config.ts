@@ -3,7 +3,4 @@
 // app.config.ts 中定义的 appConfig
 export default defineAppConfig({
   title: "chahan",
-  theme: {
-    dark: false,
-  },
 });
