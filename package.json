@@ -21,7 +21,6 @@
     "axios": "^1.8.3",
     "bcryptjs": "^3.0.2",
     "echarts": "^5.6.0",
-    "element-plus": "^2.9.4",
     "nuxt": "^3.16.0",
     "nuxt-mongoose": "^1.0.6",
     "vue": "^3.5.13",
@@ -29,6 +28,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@element-plus/nuxt": "^1.1.1",
     "@eslint/js": "^9.22.0",
     "@nuxt/eslint": "^1.2.0",
     "@nuxt/eslint-config": "^1.2.0",
@@ -47,6 +47,7 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "animate.css": "^4.1.1",
+    "element-plus": "^2.9.6",
     "eslint": "^9.22.0",
     "eslint-plugin-vue": "^10.0.0",
     "husky": "^9.1.7",

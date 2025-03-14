@@ -20,6 +20,13 @@ export const viteConfig: ViteConfig = {
     vueJsx(),
     visualizer({ open: true }),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // additionalData: '@use "~/assets/scss/global.scss";',
+      },
+    },
+  },
 }
 
 // Nuxt 配置
@@ -69,8 +76,8 @@ export default defineNuxtConfig({
   //! nuxt 使用 tailwindcss
   //! 导入 element-plus 样式表
   css: [
-    '~/assets/css/tailwind.css', // @
-    '~/assets/scss/global.scss', // @
+    '~/assets/css/tailwind.css',
+    '~/assets/scss/global.scss',
     'element-plus/dist/index.css',
     'animate.css',
   ],
@@ -88,5 +95,5 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
 
-  modules: ['@nuxt/eslint', 'nuxt-mongoose', '@pinia/nuxt'],
+  modules: ['@nuxt/eslint', 'nuxt-mongoose', '@pinia/nuxt', '@element-plus/nuxt'],
 })

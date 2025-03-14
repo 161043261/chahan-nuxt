@@ -36,8 +36,7 @@ const formRules = reactive<FormRules<IFormData>>({
 const formRef = ref<InstanceType<typeof ElForm>>()
 // ref<InstanceType<typeof ElForm>>()
 
-// const user = useUser()
-const router = useRouter()
+// const router = useRouter()
 
 const handleInput = () => {
   console.log(formData.username, formData.password)
@@ -48,72 +47,57 @@ const handleLogin = () => {}
 const handleRegister = () => {
   formRef.value?.validate(async (isValid: boolean) => {
     if (isValid) {
-      const data = await $fetch('/api/auth/register', {
-        method: 'POST',
-        body: formData,
-      })
-      console.log(data)
-      ElMessage.success({
-        message: '注册成功',
-        grouping: true,
-      })
+      try {
+        const data = await $fetch('/api/auth/register', {
+          method: 'POST',
+          body: formData,
+        })
+        if (import.meta.dev) {
+          console.log('data:', data)
+        }
+        ElMessage.success({ message: '注册成功', grouping: true })
+      } catch (err) {
+        if (import.meta.dev) {
+          console.log('err:', err)
+        }
+        ElMessage.error({ message: '注册失败, 用户已存在', grouping: true })
+        clearError()
+      }
     }
   })
 }
-
-const Login = defineComponent(() => {
-  return () => (
-    <div class="bg h-dvh bg-cover bg-center bg-no-repeat">
-      <div class="glass-container absolute top-[50%] left-[10%] h-[300px] w-[500px] translate-y-[-50%] rounded-3xl p-[50px]">
-        <div class="mb-[20px] flex items-center justify-center gap-[10px]">
-          <Rice theme="filled" size="48" fill="#b8e986" strokeWidth={3} />
-          <h1 class="text-3xl text-slate-500">炒饭机器人管理平台</h1>
-        </div>
-
-        <ElForm
-          class="w-[80%]"
-          model={formData}
-          labelWidth={'auto'}
-          rules={formRules}
-          ref={formRef}
-        >
-          <ElFormItem label="账号" prop="username">
-            <ElInput
-              v-model={formData.username}
-              placeholder="请输入账号"
-              prefixIcon={User}
-              onInput={handleInput}
-            />
-          </ElFormItem>
-
-          <ElFormItem label="密码" prop="password">
-            <ElInput
-              v-model={formData.password}
-              placeholder="请输入密码"
-              prefixIcon={Lock}
-              type="password"
-              onInput={handleInput}
-            />
-          </ElFormItem>
-
-          <div class="flex flex-row-reverse gap-[20px]">
-            <ElButton type="default" class="w-[100px]" onClick={handleRegister}>
-              注册
-            </ElButton>
-            <ElButton type="success" class="w-[100px]" onClick={handleLogin}>
-              登录
-            </ElButton>
-          </div>
-        </ElForm>
-      </div>
-    </div>
-  )
-})
 </script>
 
 <template>
-  <main>
-    <Login />
+  <main class="bg h-dvh bg-cover bg-center bg-no-repeat">
+    <div
+      class="glass-container absolute top-[50%] left-[10%] h-[300px] w-[456px] translate-y-[-50%] rounded-3xl p-[50px]"
+    >
+      <div class="mb-[20px] flex items-center justify-center gap-[10px]">
+        <Rice theme="filled" size="48" fill="#b8e986" :stroke-width="3" />
+        <h1 class="text-3xl text-slate-500">炒饭机器人管理平台</h1>
+      </div>
+
+      <ElForm ref="formRef" :model="formData" label-width="auto" :rules="formRules">
+        <ElFormItem label="账号" prop="username">
+          <ElInput v-model="formData.username" placeholder="请输入账号" :prefix-icon="User" />
+        </ElFormItem>
+
+        <ElFormItem label="密码" prop="password">
+          <ElInput
+            v-model="formData.password"
+            placeholder="请输入密码"
+            :prefix-icon="Lock"
+            type="password"
+          />
+        </ElFormItem>
+
+        <div class="flex flex-row-reverse gap-[20px]">
+          <ElButton type="default" class="!w-[100px]" @click="handleRegister">注册</ElButton>
+          <ElButton type="success" class="!w-[100px]" @click="handleLogin">登录</ElButton>
+        </div>
+      </ElForm>
+    </div>
   </main>
 </template>
 
