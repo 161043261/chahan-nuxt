@@ -46,7 +46,8 @@
   font-weight: 400;
   font-stretch: normal;
   font-style: normal;
-  src: url('/Iosevka-Regular.woff2') format('woff2');
+  //! 不能使用 ./assets/fonts/Iosevka-Regular.woff2 相对路径
+  src: url('~/assets/fonts/Iosevka-Regular.woff2') format('woff2');
 }
 
 :root {

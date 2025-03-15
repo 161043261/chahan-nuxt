@@ -66,7 +66,7 @@ const handleRegister = () => {
       return
     }
     try {
-      await useFetch('/api/auth/login', {
+      await useFetch('/api/auth/register', {
         method: 'POST',
         body: formData,
       })
@@ -127,7 +127,7 @@ const handleRegister = () => {
 }
 
 .bg {
-  background-image: url('~/assets/img/bg.jpg');
+  background-image: url('~/assets/imgs/bg.jpg');
 }
 
 .glass-container {

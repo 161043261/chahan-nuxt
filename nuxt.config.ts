@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import tailwindcss from '@tailwindcss/vite'
@@ -8,7 +7,6 @@ import { visualizer } from 'rollup-plugin-visualizer'
 export const viteConfig: ViteConfig = {
   plugins: [
     // 使用 tailwindcss
-    // @ts-ignore
     tailwindcss(),
     visualizer({ open: true }),
   ],
@@ -24,7 +22,9 @@ export const viteConfig: ViteConfig = {
 // Nuxt 配置
 export default defineNuxtConfig({
   imports: {
-    autoImport: false,
+    autoImport: true,
+    // 为自己的代码禁用自动导入
+    scan: false,
   },
 
   devtools: { enabled: true },
@@ -93,6 +93,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/eslint',
+    // '@nuxtjs/tailwindcss',
     '@element-plus/nuxt',
     '@pinia/nuxt',
     'nuxt-mongoose',
