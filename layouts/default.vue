@@ -8,7 +8,4 @@
 </template>
 
 <style lang="css" scoped>
-.layout-default {
-  background: lightgreen;
-}
 </style>

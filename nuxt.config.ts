@@ -92,13 +92,12 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxt/eslint',
-    // '@nuxtjs/tailwindcss',
+    '@nuxt/eslint', // '@nuxtjs/tailwindcss',
     '@element-plus/nuxt',
     '@pinia/nuxt',
     'nuxt-mongoose',
     './modules/auth.module',
+    '@nuxtjs/mdc',
   ],
-
   compatibilityDate: '2025-03-14',
 })

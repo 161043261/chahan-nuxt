@@ -5,7 +5,7 @@ import type { AuthPayload } from '~/types'
 
 //! A composable that requires access to the Nuxt instance was called outside of a
 //! plugin, Nuxt hook, Nuxt middleware, or Vue setup function.
-// 所以使用高阶函数
+// 必须使用高阶函数
 const _useAuthState = () => useState<AuthPayload>('auth' /** key */, () => ({}) /** initializer */)
 
 async function clear() {

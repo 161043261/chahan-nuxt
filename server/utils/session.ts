@@ -18,8 +18,8 @@ export async function useSessionStorage(event: H3Event, username?: string) {
     await session.update({ username })
   }
 
-  console.log(session)
-  console.log(session.data)
+  console.log('session', session)
+  console.log('session.data', session.data)
 
   return {
     ...session,

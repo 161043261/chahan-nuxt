@@ -1,4 +1,4 @@
-import { useAuthState } from '~/composables/useAuth'
+import { useAuthState } from '~/composables/useAuth.store'
 import { WHITE_LIST } from '~/constants'
 
 export default defineNuxtRouteMiddleware((to /** , from */) => {

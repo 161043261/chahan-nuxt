@@ -24,6 +24,6 @@ export default defineNuxtModule<ModuleOptions>({
       excludeRoutes: options.excludeRoutes,
     }
 
-    logger.debug(nuxt.options.runtimeConfig)
+    logger.debug("runtimeConfig:", nuxt.options.runtimeConfig)
   },
 })
