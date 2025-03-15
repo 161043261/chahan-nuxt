@@ -1,7 +1,10 @@
+import { createError, defineEventHandler, readBody } from '#imports'
 import bcrypt from 'bcryptjs'
+import type { H3Event } from 'h3'
 import { UserSchema } from '~/server/models/user.schema'
+import { setAuth } from '~/server/utils/auth'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: H3Event) => {
   const { username, password } = await readBody(event)
   if (!username || !password) {
     throw createError({
@@ -19,5 +22,8 @@ export default defineEventHandler(async (event) => {
   if (!matched) {
     throw createError({ message: '账号或密码错误' })
   }
+
+  await setAuth(event, user.username)
+
   return {}
 })

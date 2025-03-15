@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { definePageMeta } from '#imports'
+import { definePageMeta, useFetch } from '#imports'
 
 definePageMeta({
   layout: 'default', // 使用默认布局

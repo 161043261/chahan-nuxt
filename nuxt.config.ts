@@ -24,7 +24,7 @@ export const viteConfig: ViteConfig = {
 // Nuxt 配置
 export default defineNuxtConfig({
   imports: {
-    autoImport: true,
+    autoImport: false,
   },
 
   devtools: { enabled: true },

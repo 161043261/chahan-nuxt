@@ -1,4 +1,5 @@
-<script setup lang="tsx">
+<script setup lang="ts">
+import { clearError, definePageMeta, reactive, ref, useFetch } from '#imports'
 import { Lock, Rice, User } from '@icon-park/vue-next'
 import { ElButton, ElForm, ElFormItem, ElInput, ElMessage, type FormRules } from 'element-plus'
 

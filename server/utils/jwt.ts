@@ -1,5 +1,6 @@
 import type { AuthPayload } from '~/types'
 import { SignJWT, jwtVerify } from 'jose'
+import { useRuntimeConfig } from '#imports'
 
 const { auth } = useRuntimeConfig()
 
