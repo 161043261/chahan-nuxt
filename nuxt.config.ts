@@ -32,8 +32,9 @@ export const viteConfig: ViteConfig = {
 // Nuxt 配置
 export default defineNuxtConfig({
   imports: {
-    autoImport: false,
+    autoImport: true,
   },
+
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
@@ -73,6 +74,7 @@ export default defineNuxtConfig({
       uri: process.env.MONGODB_URI,
       devtools: false,
       options: {},
+      modelsDir: 'models',
     },
   },
 
@@ -98,5 +100,11 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
 
-  modules: ['@nuxt/eslint', 'nuxt-mongoose', '@pinia/nuxt', '@element-plus/nuxt'],
+  modules: [
+    '@nuxt/eslint',
+    'nuxt-mongoose',
+    '@pinia/nuxt',
+    '@element-plus/nuxt',
+    './modules/auth.module',
+  ],
 })
