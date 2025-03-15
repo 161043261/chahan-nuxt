@@ -2,7 +2,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import tailwindcss from '@tailwindcss/vite'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 import type { ViteConfig } from 'nuxt/schema'
 import { visualizer } from 'rollup-plugin-visualizer'
 
@@ -11,8 +10,6 @@ export const viteConfig: ViteConfig = {
     // 使用 tailwindcss
     // @ts-ignore
     tailwindcss(),
-    // @ts-ignore
-    vueJsx(),
     visualizer({ open: true }),
   ],
   css: {
@@ -67,8 +64,8 @@ export default defineNuxtConfig({
     mongoose: {
       uri: process.env.MONGODB_URI,
       devtools: true,
+      // server/models, 用于 autoImport
       modelsDir: 'models',
-      options: {},
     },
   },
 
@@ -101,4 +98,6 @@ export default defineNuxtConfig({
     'nuxt-mongoose',
     './modules/auth.module',
   ],
+
+  compatibilityDate: '2025-03-14',
 })

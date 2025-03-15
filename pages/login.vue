@@ -43,18 +43,15 @@ const handleLogin = () => {
       return
     }
     try {
-      const data = await $fetch('/api/auth/login', {
+      await useFetch('/api/auth/login', {
         method: 'POST',
         body: formData,
       })
-      if (import.meta.dev) {
-        console.log('data:', data)
-      }
       ElMessage.success({ message: '登录成功', grouping: true })
       // router.push('/')
     } catch (err) {
       if (import.meta.dev) {
-        console.log('err:', err)
+        console.error(err)
       }
       ElMessage.error({ message: '登录失败, 账号或密码错误', grouping: true })
       clearError()
@@ -68,17 +65,14 @@ const handleRegister = () => {
       return
     }
     try {
-      const data = await $fetch('/api/auth/register', {
+      await useFetch('/api/auth/login', {
         method: 'POST',
         body: formData,
       })
-      if (import.meta.dev) {
-        console.log('data:', data)
-      }
       ElMessage.success({ message: '注册成功', grouping: true })
     } catch (err) {
       if (import.meta.dev) {
-        console.log('err:', err)
+        console.error(err)
       }
       ElMessage.error({ message: '注册失败, 账号已存在', grouping: true })
       clearError()
