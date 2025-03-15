@@ -1,4 +1,5 @@
 import type { JWTPayload } from 'jose'
+import type { ObjectId } from 'mongoose'
 
 export interface AuthPayload extends JWTPayload {
   // iss?: string            // JWT Issuer
@@ -9,4 +10,10 @@ export interface AuthPayload extends JWTPayload {
   // exp?: number            // JWT Expiration Time
   // iat?: number            // JWT Issued At
   username?: string
+}
+
+export interface User {
+  _id: ObjectId
+  username: string,
+  password: string
 }

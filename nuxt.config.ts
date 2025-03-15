@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-// import vue from '@vitejs/plugin-vue'
-// import vueDevTools from "vite-plugin-vue-devtools";
 import tailwindcss from '@tailwindcss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import type { ViteConfig } from 'nuxt/schema'
@@ -10,10 +8,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 
 export const viteConfig: ViteConfig = {
   plugins: [
-    // vue(), // 不要用!
-    // vueDevTools(), // 不要用!
-
-    // nuxt 使用 tailwindcss
+    // 使用 tailwindcss
     // @ts-ignore
     tailwindcss(),
     // @ts-ignore
@@ -35,7 +30,6 @@ export default defineNuxtConfig({
     autoImport: true,
   },
 
-  compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
   typescript: {
@@ -72,9 +66,9 @@ export default defineNuxtConfig({
 
     mongoose: {
       uri: process.env.MONGODB_URI,
-      devtools: false,
-      options: {},
+      devtools: true,
       modelsDir: 'models',
+      options: {},
     },
   },
 
@@ -102,9 +96,9 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/eslint',
-    'nuxt-mongoose',
-    '@pinia/nuxt',
     '@element-plus/nuxt',
+    '@pinia/nuxt',
+    'nuxt-mongoose',
     './modules/auth.module',
   ],
 })

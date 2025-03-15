@@ -1,6 +1,5 @@
 import type { AuthPayload } from '~/types'
 import { SignJWT, jwtVerify } from 'jose'
-import { useRuntimeConfig } from 'nuxt/app'
 
 const { auth } = useRuntimeConfig()
 
