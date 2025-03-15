@@ -6,7 +6,6 @@ import { ElButton, ElForm, ElFormItem, ElInput, ElMessage, type FormRules } from
 // macros
 definePageMeta({
   layout: false, // 不使用布局
-  name: 'login',
 })
 
 // const emit = defineEmits(['update:modelValue'])

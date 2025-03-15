@@ -98,6 +98,7 @@ export default defineNuxtConfig({
     'nuxt-mongoose',
     './modules/auth.module',
     '@nuxtjs/mdc',
+    '@nuxt/content',
   ],
   compatibilityDate: '2025-03-14',
 })
