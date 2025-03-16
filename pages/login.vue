@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Lock, Rice, User } from '@icon-park/vue-next'
 import { ElButton, ElForm, ElFormItem, ElInput, ElMessage, type FormRules } from 'element-plus'
+import { useUserState } from '~/composables/useUser.state'
 
 // macros
 definePageMeta({
@@ -34,19 +35,17 @@ const formRules = reactive<FormRules<IFormData>>({
 const formRef = ref<InstanceType<typeof ElForm>>()
 // ref<InstanceType<typeof ElForm>>()
 
-// const router = useRouter()
+const userState = useUserState()
+const router = useRouter()
 const handleLogin = () => {
   formRef.value?.validate(async (isValid: boolean) => {
     if (!isValid) {
       return
     }
     try {
-      await $fetch('/api/user/login', {
-        method: 'POST',
-        body: formData,
-      })
+      await userState.login(formData)
       ElMessage.success({ message: '登录成功', grouping: true })
-      // router.push('/')
+      router.push('/dashboard')
     } catch (err) {
       if (import.meta.dev) {
         console.error(err)

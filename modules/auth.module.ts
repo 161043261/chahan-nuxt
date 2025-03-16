@@ -69,10 +69,5 @@ export default defineNuxtModule<ModuleOptions>({
     } catch (err) {
       console.error(err)
     }
-
-    // if (import.meta.dev) {
-    //   console.log('runtimeConfig.auth:', runtimeConfig.auth)
-    //   console.log('runtimeConfig.public.whitelist:', runtimeConfig.public.whitelist)
-    // }
   },
 })

@@ -26,6 +26,8 @@ export default defineEventHandler(async (event: H3Event) => {
     throw createError({ message: '账号或密码错误' })
   }
   const token = await setAuth(event, user.username)
+
+  ////////////////////////
   return {
     token,
     menu,

@@ -14,7 +14,6 @@ interface Props {
 //   // expose
 //   name: 'ToastIndex',
 //   setup(props: Props, ctx /** { attrs, slots, emit, expose } */) {
-//     console.log(props)
 //     const isAlive = ref(false)
 //     let timer: number | null = null
 
@@ -32,7 +31,6 @@ interface Props {
 //         return
 //       }
 //       isAlive.value = true
-//       console.log(props.duration)
 //       timer = setTimeout(() => {
 //         isAlive.value = false
 //         timer = null

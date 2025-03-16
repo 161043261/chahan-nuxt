@@ -14,7 +14,7 @@ export async function useSessionManager(event: H3Event, token?: string) {
     await session.update({ token })
   }
   // session.data: { token: '' }
-  console.log('session.data', session.data)
+  // console.log('session.data', session.data)
   return {
     ...session,
     data: session.data as AuthPayload, // { username?: string }

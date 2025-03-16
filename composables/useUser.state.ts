@@ -1,13 +1,15 @@
 import type { LoginBody, MenuItem } from '~/types/user'
 
+// 必须使用高阶函数
 const _useUserState = () =>
   useState(
     'user', // key
     () => {
+      //! sessionStorage is not defined
       // 菜单
-      const menu = JSON.parse(sessionStorage.getItem('menu') ?? '[]') as MenuItem[]
+      const menu = [] as MenuItem[]
       // token
-      const token = sessionStorage.getItem('token') ?? ''
+      const token = ''
 
       return {
         menu,
@@ -20,12 +22,11 @@ async function login(body: LoginBody) {
   try {
     const resData = (await $fetch('/api/user/login', {
       body,
+      method: 'POST',
+      headers: [],
     })) as { token: string; menu: MenuItem[] }
-    console.log(resData)
-    // menu.value = resData.menu
     _useUserState().value.menu = resData.menu
     _useUserState().value.token = resData.token
-    // token.value = resData.token
   } catch (err) {
     if (import.meta.dev) {
       console.error(err)
@@ -33,19 +34,28 @@ async function login(body: LoginBody) {
   }
 }
 
-async function logout() {
+function reset() {
   _useUserState().value = {
     menu: [],
     token: '',
   }
 }
 
+async function logout() {
+  await $fetch('/api/user/logout', {
+    method: 'DELETE',
+  })
+  reset()
+}
+
 export function useUserState() {
   const userState = _useUserState()
   return {
     loggedIn: computed(() => Boolean(userState.value.token)),
-    user: userState,
+    menu: computed(() => userState.value.menu),
+    token: computed(() => userState.value.token),
     login,
+    reset,
     logout,
   }
 }

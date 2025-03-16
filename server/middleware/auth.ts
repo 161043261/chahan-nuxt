@@ -1,5 +1,6 @@
 import { defineEventHandler, getRequestURL } from '#imports'
+import { getTime } from '~/utils'
 
 export default defineEventHandler((event) => {
-  console.log('新请求的 URL:', getRequestURL(event).href)
+  console.log(`[${getTime()}] Request URL:`, getRequestURL(event).href)
 })
