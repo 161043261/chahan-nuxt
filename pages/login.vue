@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { clearError, definePageMeta, reactive, ref, useFetch } from '#imports'
 import { Lock, Rice, User } from '@icon-park/vue-next'
 import { ElButton, ElForm, ElFormItem, ElInput, ElMessage, type FormRules } from 'element-plus'
 
@@ -9,7 +8,6 @@ definePageMeta({
 })
 
 // const emit = defineEmits(['update:modelValue'])
-
 interface IFormData {
   username: string
   password: string
@@ -43,7 +41,7 @@ const handleLogin = () => {
       return
     }
     try {
-      await useFetch('/api/auth/login', {
+      await $fetch('/api/auth/login', {
         method: 'POST',
         body: formData,
       })
@@ -65,7 +63,7 @@ const handleRegister = () => {
       return
     }
     try {
-      await useFetch('/api/auth/register', {
+      await $fetch('/api/auth/register', {
         method: 'POST',
         body: formData,
       })

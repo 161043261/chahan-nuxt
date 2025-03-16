@@ -16,8 +16,13 @@ export default defineEventHandler(async (event) => {
     //   })
     // }
     // await db?.collection('users').insertOne({ username, password: hashedPassword })
-    await UserSchema.insertOne({ username, password: hashedPassword })
+    await UserSchema.insertOne({ username, password: hashedPassword }).then(() =>
+      setAuth(event, username),
+    )
   } catch (err) {
+    if (import.meta.dev) {
+      console.error(err)
+    }
     throw createError({
       // Please prefer using message for longer error messages instead of statusMessage
       message: String(err),

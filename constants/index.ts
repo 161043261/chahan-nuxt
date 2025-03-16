@@ -1,5 +1,3 @@
-export const WHITE_LIST = new Set<string>(['/login', '/getting-started'])
-
 export const ROBOT_STATES = [
   '全部' /** 0 */,
   '闲置' /** 1 */,

@@ -12,7 +12,7 @@ interface Props {
 //   props: ['message', 'type', 'duration'],
 //   // emits
 //   // expose
-//   // name
+//   name: 'ToastIndex',
 //   setup(props: Props, ctx /** { attrs, slots, emit, expose } */) {
 //     console.log(props)
 //     const isAlive = ref(false)
