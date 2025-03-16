@@ -3,6 +3,7 @@ import { WHITE_LIST } from '~/constants'
 
 export default defineNuxtRouteMiddleware((to /** , from */) => {
   const { loggedIn } = useAuthState()
+  console.log("loggedIn:", loggedIn.value)
   // watch(() => loggedIn.value, () => {
   if (!WHITE_LIST.has(to.path) && !loggedIn.value) {
     return navigateTo('/login')

@@ -71,6 +71,7 @@ interface Props {
 //   },
 // })
 
+// export default defineComponent(() => () => <></>)
 export default defineComponent(
   (props: Props, ctx /** { attrs, slots, emit, expose } */) => {
     const isAlive = ref(false)
@@ -115,7 +116,7 @@ export default defineComponent(
                     default:
                       return <Attention theme="filled" size="24" fill="#4a90e2" />
                   }
-                })(props.type)}
+                })(props.type) /** IIFE, Immediately Invoked Function Expression */}
                 <span>{props.message}</span>
               </div>
             </div>

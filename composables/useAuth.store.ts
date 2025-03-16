@@ -19,9 +19,7 @@ export function useAuthState() {
   const authState = _useAuthState()
   return {
     loggedIn: computed(() => Boolean(authState.value?.username)),
-    _loggedIn: Boolean(authState.value?.username),
-    user: computed(() => authState.value),
-    _user: authState.value,
+    user: () => authState,
     clear,
   }
 }
