@@ -16,6 +16,6 @@ useSeoMeta({
 <template>
   <div>
     <ContentRenderer v-if="data" :value="data" />
-    <div v-else>Content 未找到</div>
+    <div v-else>content/nuxt.md 未找到</div>
   </div>
 </template>
