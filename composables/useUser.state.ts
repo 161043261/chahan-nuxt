@@ -1,3 +1,4 @@
+import type { Resp } from '~/types/resp'
 import type { ILoginBody, IMenuItem } from '~/types/user'
 
 // 必须使用高阶函数
@@ -20,13 +21,13 @@ const _useUserState = () =>
 
 async function login(body: ILoginBody) {
   try {
-    const resData = (await $fetch('/api/user/login', {
+    const res = (await $fetch('/api/user/login', {
       body,
       method: 'POST',
       headers: [],
-    })) as { token: string; menu: IMenuItem[] }
-    _useUserState().value.menu = resData.menu
-    _useUserState().value.token = resData.token
+    })) as Resp<{ token: string; menu: IMenuItem[] }>
+    _useUserState().value.menu = res.data.menu
+    _useUserState().value.token = res.data.token
   } catch (err) {
     if (import.meta.dev) {
       console.error(err)

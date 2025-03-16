@@ -1,10 +1,10 @@
-export interface IRevenue {
+export interface IRevenueItem {
   id: number
   address: string
   revenue?: number
 }
 
-export interface ITimeLine {
+export interface ITimeLineItem {
   timestamp: number
   message: string
 }

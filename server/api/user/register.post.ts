@@ -1,6 +1,7 @@
 import { defineEventHandler, readBody, createError } from '#imports'
 import bcrypt from 'bcryptjs'
 import { UserSchema } from '~/server/models/user.schema'
+import type { Resp } from '~/types/resp'
 
 export default defineEventHandler(async (event) => {
   const { username, password } = await readBody(event)
@@ -29,5 +30,8 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  return ''
+  return {
+    msg: '注册成功',
+    data: '',
+  } as Resp<string>
 })

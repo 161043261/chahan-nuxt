@@ -1,4 +1,5 @@
 import type { ChartData, ChartData2, ChartData3 } from '~/types/chart'
+import type { Resp } from '~/types/resp'
 import { randArr, randNum } from '~/utils'
 
 export default defineEventHandler(async (event) => {
@@ -10,20 +11,29 @@ export default defineEventHandler(async (event) => {
   // 1 2 3 4
   switch (chartId) {
     case 1:
-      return [
-        { name: '炒饭A', data: randNum(1, 100) },
-        { name: '炒饭B', data: randNum(1, 100) },
-        { name: '炒饭C', data: randNum(1, 100) },
-      ] as ChartData
+      return {
+        msg: '获取营收比例成功',
+        data: [
+          { name: '炒饭A', data: randNum(1, 100) },
+          { name: '炒饭B', data: randNum(1, 100) },
+          { name: '炒饭C', data: randNum(1, 100) },
+        ],
+      } as Resp<ChartData>
 
     case 2:
-      return [
-        { name: '充电量', data: randArr(1, 100, 9) },
-        { name: '充电时长', data: randArr(1, 100, 9) },
-        { name: '充电功率', data: randArr(1, 100, 9) },
-      ] as ChartData2
+      return {
+        msg: '获取充电信息成功',
+        data: [
+          { name: '充电功率', data: randArr(1, 100, 9) },
+          { name: '充电时长', data: randArr(1, 100, 9) },
+          { name: '充电量', data: randArr(1, 100, 9) },
+        ],
+      } as Resp<ChartData2>
 
     case 3:
-      return randArr(1, 100, 5) as ChartData3
+      return {
+        msg: '获取五边形数据成功',
+        data: randArr(1, 100, 5),
+      } as Resp<ChartData3>
   }
 })

@@ -4,6 +4,8 @@ import type { H3Event } from 'h3'
 import { UserSchema } from '~/server/models/user.schema'
 import { setAuth } from '~/server/utils/auth'
 import menu from '~/server/assets/menu.json'
+import type { Resp } from '~/types/resp'
+import type { IMenuItem } from '~/types/user'
 
 export default defineEventHandler(async (event: H3Event) => {
   const { username, password } = await readBody(event)
@@ -29,7 +31,10 @@ export default defineEventHandler(async (event: H3Event) => {
 
   ////////////////////////
   return {
-    token,
-    menu,
-  }
+    msg: '登录成功',
+    data: {
+      token,
+      menu,
+    },
+  } as Resp<{ token: string; menu: IMenuItem[] }>
 })

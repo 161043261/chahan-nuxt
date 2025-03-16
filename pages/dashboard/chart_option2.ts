@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ECOption } from '@/utils/echarts'
 import type { ChartData2 } from '~/types/chart'
+import type { Resp } from '~/types/resp'
 
 const getChartOption2 = async () => {
-  const { data: chartData } = await useFetch<ChartData2>('/api/chart/2')
+  const { data: chartData } = await useFetch<Resp<ChartData2>>('/api/chart/2')
   const chartOption: ECOption = {
     title: {
       text: '机器人电量统计',
@@ -65,10 +66,10 @@ const getChartOption2 = async () => {
     ],
   }
 
-  ;(chartOption.legend as any).data = (chartData.value ?? []).map(({ name }) => name)
-  for (let i = 0; i < (chartData.value?.length ?? 0); i++) {
-    ;(chartOption.series as any)[i].name = chartData.value![i].name
-    ;(chartOption.series as any)[i].data = chartData.value![i].data
+  ;(chartOption.legend as any).data = (chartData.value?.data ?? []).map(({ name }) => name)
+  for (let i = 0; i < (chartData.value?.data.length ?? 0); i++) {
+    ;(chartOption.series as any)[i].name = chartData.value!.data[i].name
+    ;(chartOption.series as any)[i].data = chartData.value!.data[i].data
   }
   return chartOption
 }

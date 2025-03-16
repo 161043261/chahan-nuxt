@@ -1,8 +1,8 @@
 import mockjs from 'mockjs'
-import type { IRevenue } from '~/types/dashboard'
+import type { IRevenueItem } from '~/types/dashboard'
 
 export function mockRevenueList(amount: number): {
-  revenueList: IRevenue[]
+  revenueList: IRevenueItem[]
 } {
   return mockjs.mock({
     [`revenueList|${amount}`]: [

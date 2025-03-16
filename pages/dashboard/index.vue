@@ -5,19 +5,22 @@ import { useChart } from '~/composables/useChart'
 import getChartOption from './chart_option'
 import getChartOption2 from './chart_option2'
 import getChartOption3 from './chart_option3'
-import type { IRevenue, ITimeLine } from '~/types/dashboard'
+import type { IRevenueItem, ITimeLineItem } from '~/types/dashboard'
 import { commaSep } from '~/utils/comma_sep'
+import bus from '~/utils/bus'
 
 const userState = useUserState()
 const { menu } = userState
+
 const chartRef = ref<HTMLDivElement | null>(null)
 const chartRef2 = ref<HTMLDivElement | null>(null)
 const chartRef3 = ref<HTMLDivElement | null>(null)
+
 const updateChart = useChart(chartRef, getChartOption)
 const updateChart2 = useChart(chartRef2, getChartOption2)
 const updateChart3 = useChart(chartRef3, getChartOption3)
 
-const renderFunc = (props: { item: IRevenue; idx: number }) => {
+const renderFunc = (props: { item: IRevenueItem; idx: number }) => {
   return (
     <div
       class={['flex']}
@@ -31,7 +34,7 @@ const renderFunc = (props: { item: IRevenue; idx: number }) => {
   )
 }
 
-const timelineList = reactive<ITimeLine[]>([
+const timelineList = reactive<ITimeLineItem[]>([
   /** { timestamp: Date.now(), message: '测试' } */
 ])
 
@@ -42,6 +45,48 @@ const formatter = (timestamp: number) => {
   const ss = date.getSeconds().toString().padStart(2, '0')
   return `${hh}:${mm}:${ss}`
 }
+// bus.subscribe('http-response', (item: ITimeLineItem) => timelineList.unshift(item))
+let timer: null | number | NodeJS.Timeout = null
+
+// 资源清理
+onBeforeUnmount(() => {
+  if (timer) {
+    clearTimeout(timer)
+    timer = null
+  }
+})
+
+const animated = ref<boolean>(false)
+const animatedIdx = ref(0)
+
+/**
+ *
+ * @param idx 索引
+ * @param callbacks (多个) 回调函数
+ * @description 节流 throttle
+ */
+const handleClick = (idx: 0 | 1 | 2, callbacks: (() => void)[]) => {
+  if (timer) {
+    return
+  }
+
+  // proxy?.$toast.default('请等待')
+  toast.default('请等待')
+
+  animated.value = true
+  animatedIdx.value = idx
+  timer = setTimeout(() => {
+    animated.value = false
+    timer = null
+    callbacks.forEach((cb) => cb())
+  }, 2000)
+}
+
+const virtualListRef = ref<InstanceType<typeof VirtualList>>()
+const virtualListSize = ref<number>(0)
+
+// provide
+provide('virtualListSize' /** key */, virtualListSize /** value */)
 </script>
 
 <template>
@@ -140,9 +185,9 @@ const formatter = (timestamp: number) => {
           <ElTimeline class="overflow-auto">
             <ElTimelineItem
               v-for="timeline of timelineList"
+              :key="timeline.timestamp"
               center
               :timestamp="formatter(timeline.timestamp)"
-              :key="timeline.timestamp"
             >
               <ElCard class="!rounded-xl">
                 {{ timeline.message }}
