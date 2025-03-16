@@ -2,8 +2,10 @@
 
 import { ROBOT_STATES } from '@/constants'
 import type { ECOption } from '@/utils/echarts'
+import type { ChartData3 } from '~/types/chart';
 
-const getChartOption3 = async (chartData: any) => {
+const getChartOption3 = async () => {
+  const { data: chartData } = await useFetch<ChartData3>('/api/chart/3')
   const chartOption: ECOption = {
     radar: {
       shape: 'circle',
@@ -25,7 +27,7 @@ const getChartOption3 = async (chartData: any) => {
     ],
   }
 
-  ;(chartOption.series as any)[0].data[0].value = chartData.data
+  ;(chartOption.series as any)[0].data[0].value = chartData.value
   return chartOption
 }
 

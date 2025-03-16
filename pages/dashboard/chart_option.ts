@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ChartData } from '~/types/chart'
 import type { ECOption } from '~/utils/echarts'
 
-const getChartOption = async (chartData: any) => {
+const getChartOption = async () => {
+  const { data: chartData } = await useFetch<ChartData>('/api/chart/1')
   const chartOption: ECOption = {
     legend: {
       top: 'bottom',
@@ -44,8 +46,8 @@ const getChartOption = async (chartData: any) => {
       },
     },
   }
-  for (let i = 0; i < chartData.data.length; i++) {
-    ;(chartOption.series as any)[0].data = chartData.data
+  for (let i = 0; i < (chartData.value?.length ?? 0); i++) {
+    ;(chartOption.series as any)[0].data = chartData.value![i]
   }
   return chartOption
 }

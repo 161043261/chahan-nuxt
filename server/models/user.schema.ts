@@ -1,9 +1,9 @@
 // import { defineMongooseModel } from '~/node_modules/nuxt-mongoose/dist/runtime/server/services/model'
 import type { Schema } from 'mongoose'
-import type { User } from '~/types'
+import type { IUser } from '~/types'
 import { defineMongooseModel } from '~/server/utils/mongoose'
 
-export const UserSchema = defineMongooseModel<User>({
+export const UserSchema = defineMongooseModel<IUser>({
   name: 'User',
   schema: {
     username: {

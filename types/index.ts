@@ -1,7 +1,7 @@
 import type { JWTPayload } from 'jose'
 import type { ObjectId } from 'mongoose'
 
-export interface AuthPayload extends JWTPayload {
+export interface IAuthPayload extends JWTPayload {
   // iss?: string            // JWT Issuer
   // sub?: string            // JWT Subject
   // aud?: string | string[] // JWT Audience
@@ -12,8 +12,8 @@ export interface AuthPayload extends JWTPayload {
   username?: string
 }
 
-export interface User {
+export interface IUser {
   _id: ObjectId
-  username: string,
+  username: string
   password: string
 }

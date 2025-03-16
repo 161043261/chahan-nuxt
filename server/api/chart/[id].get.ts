@@ -1,4 +1,4 @@
-import type { ChartData, ChartData2, ChartData3, ChartData4 } from '~/types/chart'
+import type { ChartData, ChartData2, ChartData3 } from '~/types/chart'
 import { randArr, randNum } from '~/utils'
 
 export default defineEventHandler(async (event) => {
@@ -11,25 +11,19 @@ export default defineEventHandler(async (event) => {
   switch (chartId) {
     case 1:
       return [
-        { name: '炒饭A', value: randNum(1, 100) },
-        { name: '炒饭B', value: randNum(1, 100) },
-        { name: '炒饭C', value: randNum(1, 100) },
+        { name: '炒饭A', data: randNum(1, 100) },
+        { name: '炒饭B', data: randNum(1, 100) },
+        { name: '炒饭C', data: randNum(1, 100) },
       ] as ChartData
 
     case 2:
       return [
-        { name: '充电量', value: randArr(1, 100, 9) },
-        { name: '充电时长', value: randArr(1, 100, 9) },
-        { name: '充电功率', value: randArr(1, 100, 9) },
+        { name: '充电量', data: randArr(1, 100, 9) },
+        { name: '充电时长', data: randArr(1, 100, 9) },
+        { name: '充电功率', data: randArr(1, 100, 9) },
       ] as ChartData2
 
     case 3:
       return randArr(1, 100, 5) as ChartData3
-
-    case 4:
-      return [
-        { name: '出租', value: randArr(1, 100, 12) },
-        { name: '出售', value: randArr(1, 100, 12) },
-      ] as ChartData4
   }
 })

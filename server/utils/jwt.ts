@@ -1,4 +1,4 @@
-import type { AuthPayload } from '~/types'
+import type { IAuthPayload } from '~/types'
 import { SignJWT, jwtVerify } from 'jose'
 import { useRuntimeConfig } from '#imports'
 
@@ -20,5 +20,5 @@ export function createJwt(username: string) {
 }
 
 export async function verifyJwt(token: string) {
-  return (await jwtVerify(token, uint8ArrayKey)).payload as AuthPayload
+  return (await jwtVerify(token, uint8ArrayKey)).payload as IAuthPayload
 }

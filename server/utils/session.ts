@@ -1,4 +1,4 @@
-import type { AuthPayload } from '~/types'
+import type { IAuthPayload } from '~/types'
 import type { H3Event } from 'h3'
 import { useRuntimeConfig, useSession } from '#imports'
 
@@ -17,6 +17,6 @@ export async function useSessionManager(event: H3Event, token?: string) {
   // console.log('session.data', session.data)
   return {
     ...session,
-    data: session.data as AuthPayload, // { username?: string }
+    data: session.data as IAuthPayload, // { username?: string }
   }
 }
