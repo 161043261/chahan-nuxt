@@ -26,13 +26,14 @@ export async function getAuth(event: H3Event) {
  */
 export async function setAuth(event: H3Event, username: string) {
   const token = await createJwt(username)
-  return await Promise.all([
+  await Promise.all([
     fs.appendFile(
       join(__dirname, `../../logs/${getDate()}.log`),
       `[${getTime()}] token: ${token}\n`,
     ),
     useSessionManager(event, token),
   ])
+  return token
 }
 
 export async function clearAuth(event: H3Event) {

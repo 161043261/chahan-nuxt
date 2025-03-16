@@ -4,3 +4,8 @@ export interface MenuItem {
   icon: string
   children?: MenuItem[]
 }
+
+export interface LoginBody {
+  username: string
+  password: string
+}

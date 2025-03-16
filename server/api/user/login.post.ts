@@ -3,9 +3,11 @@ import bcrypt from 'bcryptjs'
 import type { H3Event } from 'h3'
 import { UserSchema } from '~/server/models/user.schema'
 import { setAuth } from '~/server/utils/auth'
+import menu from '~/server/assets/menu.json'
 
 export default defineEventHandler(async (event: H3Event) => {
   const { username, password } = await readBody(event)
+  console.log('password:', password)
   if (!username || !password) {
     throw createError({
       message: '账号或密码为空',
@@ -23,6 +25,9 @@ export default defineEventHandler(async (event: H3Event) => {
   if (!matched) {
     throw createError({ message: '账号或密码错误' })
   }
-  await setAuth(event, user.username)
-  return {}
+  const token = await setAuth(event, user.username)
+  return {
+    token,
+    menu,
+  }
 })

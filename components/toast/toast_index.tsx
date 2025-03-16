@@ -105,18 +105,20 @@ export default defineComponent(
           {isAlive.value ? (
             <div class="border-1st fixed top-[10%] left-[50%] z-100 -translate-x-[50%] rounded-lg border-[3px] p-[5px]">
               <div class="flex items-center gap-[5px]">
-                {((type: string) => {
-                  switch (type) {
-                    case 'success':
-                      return <CheckOne theme="filled" size="24" fill="#7ed321" />
-                    case 'error':
-                      return <CloseOne theme="filled" size="24" fill="#d0021b" />
-                    case 'warning':
-                      return <Caution theme="filled" size="24" fill="#f5a623" />
-                    default:
-                      return <Attention theme="filled" size="24" fill="#4a90e2" />
-                  }
-                })(props.type) /** IIFE, Immediately Invoked Function Expression */}
+                {
+                  ((type: string) => {
+                    switch (type) {
+                      case 'success':
+                        return <CheckOne theme="filled" size="24" fill="#7ed321" />
+                      case 'error':
+                        return <CloseOne theme="filled" size="24" fill="#d0021b" />
+                      case 'warning':
+                        return <Caution theme="filled" size="24" fill="#f5a623" />
+                      default:
+                        return <Attention theme="filled" size="24" fill="#4a90e2" />
+                    }
+                  })(props.type) /** IIFE, Immediately Invoked Function Expression */
+                }
                 <span>{props.message}</span>
               </div>
             </div>
@@ -131,6 +133,6 @@ export default defineComponent(
     props: ['duration', 'message', 'type'],
     // slots
     // emits
-    name: 'ToastIndex'
+    name: 'ToastIndex',
   },
 )

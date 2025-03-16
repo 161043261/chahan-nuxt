@@ -41,7 +41,7 @@ const handleLogin = () => {
       return
     }
     try {
-      await $fetch('/api/auth/login', {
+      await $fetch('/api/user/login', {
         method: 'POST',
         body: formData,
       })
@@ -63,7 +63,7 @@ const handleRegister = () => {
       return
     }
     try {
-      await $fetch('/api/auth/register', {
+      await $fetch('/api/user/register', {
         method: 'POST',
         body: formData,
       })

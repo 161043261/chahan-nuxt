@@ -9,7 +9,7 @@ import type { AuthPayload } from '~/types'
 const _useAuthState = () => useState<AuthPayload>('auth' /** key */, () => ({}) /** initializer */)
 
 async function clear() {
-  // await $fetch('/api/auth/logout', {
+  // await $fetch('/api/user/logout', {
   //   method: 'DELETE',
   // })
   _useAuthState().value = {}
