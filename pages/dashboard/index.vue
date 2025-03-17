@@ -84,9 +84,11 @@ const handleClick = (idx: 0 | 1 | 2, callbacks: (() => void)[]) => {
   }, 2000)
 }
 
-const virtualListRef = ref<InstanceType<typeof VirtualList> & {
-  updateLargeList: () => Promise<void>
-}>()
+const virtualListRef = ref<
+  InstanceType<typeof VirtualList> & {
+    updateLargeList: () => Promise<void>
+  }
+>()
 const virtualListSize = ref<number>(0)
 
 // provide

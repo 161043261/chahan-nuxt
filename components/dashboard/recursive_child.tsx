@@ -27,8 +27,8 @@ const RecursiveChild = defineComponent(
           <div
             class="text-[25px] transition-all duration-500 hover:scale-[2] hover:cursor-pointer"
             onClick={() => handleClick(props.item.url)}
-            >
-              {/* 使用 h 函数 */}
+          >
+            {/* 使用 h 函数 */}
             {Icon ? h(Icon!) : ''}
           </div>
         )}

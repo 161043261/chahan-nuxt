@@ -52,7 +52,6 @@ export function createToast(): {
   }
 }
 
-
 export interface Toast {
   default: (message: string, duration?: number) => void
   success: (message: string, duration?: number) => void

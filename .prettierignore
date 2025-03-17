@@ -1,6 +1,11 @@
-out
-dist
+.data
+.husky
+.nuxt
+.output
+.vscode
+assets/font
+assets/img
+logs
+node_modules
+
 pnpm-lock.yaml
-LICENSE.md
-tsconfig.json
-tsconfig.*.json

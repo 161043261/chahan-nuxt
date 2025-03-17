@@ -70,7 +70,7 @@ export default defineComponent(
           }}
         ></div>
         {/* 内容区 */}
-        <ul class="absolute top-0 left-0 w-full bg-white" style={{ transform: transform.value }}>
+        <ul class="absolute left-0 top-0 w-full bg-white" style={{ transform: transform.value }}>
           {visibleData.value.map((item, idx) => (
             <li
               key={item.id}

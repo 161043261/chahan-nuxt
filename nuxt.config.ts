@@ -1,15 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-
-import tailwindcss from '@tailwindcss/vite'
 import type { ViteConfig } from 'nuxt/schema'
-import { visualizer } from 'rollup-plugin-visualizer'
 
 export const viteConfig: ViteConfig = {
-  plugins: [
-    // 使用 tailwindcss
-    tailwindcss(),
-    visualizer({ open: true }),
-  ],
+  plugins: [],
   css: {
     preprocessorOptions: {
       scss: {
@@ -72,10 +65,10 @@ export default defineNuxtConfig({
   //! nuxt 使用 tailwindcss
   //! 导入 element-plus 样式表
   css: [
+    'animate.css',
+    'element-plus/dist/index.css',
     '~/assets/css/tailwind.css',
     '~/assets/scss/global.scss',
-    'element-plus/dist/index.css',
-    'animate.css',
   ],
 
   vite: viteConfig,
@@ -92,13 +85,19 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxt/eslint', // '@nuxtjs/tailwindcss',
+    '@nuxt/content',
+    '@nuxt/eslint',
+    '@nuxtjs/mdc',
+    '@nuxtjs/tailwindcss',
     '@element-plus/nuxt',
-    '@pinia/nuxt',
     'nuxt-mongoose',
     './modules/auth.module',
-    '@nuxtjs/mdc',
-    '@nuxt/content',
   ],
   compatibilityDate: '2025-03-14',
+  tailwindcss: {
+    cssPath: ['~/assets/css/tailwind.css', { injectPosition: 'first' }],
+    config: {},
+    viewer: true,
+    exposeConfig: false,
+  },
 })

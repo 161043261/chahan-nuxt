@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const { data } = await useAsyncData(() =>
-  queryCollection('content').path('/nuxt').first(),
-)
+const { data } = await useAsyncData(() => queryCollection('content').path('/nuxt').first())
 
 definePageMeta({
   layout: false, // 不使用布局

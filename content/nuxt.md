@@ -62,9 +62,9 @@ Nuxt 会预取 (prefetch) 组件和生成的页面, 加快路由导航速度
 和 vue-router 相同
 
 ```ts
-const route = useRoute();
-console.log(route.params); // URL 路径参数
-console.log(route.query); // URL 查询参数
+const route = useRoute()
+console.log(route.params) // URL 路径参数
+console.log(route.query) // URL 查询参数
 ```
 
 ### 路由中间件
@@ -86,16 +86,16 @@ console.log(route.query); // URL 查询参数
 ```ts [middleware/checkAuth.ts]
 export default defineNuxtRouteMiddleware((to, from) => {
   if (isAuthenticated() === false) {
-    return navigateTo("/login");
+    return navigateTo('/login')
   }
-});
+})
 ```
 
 ```vue [pages/dashboard.vue]
 <script setup lang="ts">
 definePageMeta({
-  middleware: "check-auth",
-});
+  middleware: 'check-auth',
+})
 </script>
 ```
 
@@ -115,9 +115,9 @@ definePageMeta({
     // 如果返回 false, 并且未找到其他匹配项, 将导致 404 错误
     // 也可以返回一个有 statusCode/statusMessage 属性的对象,
     // 以立即响应错误 (不会继续寻找其他匹配项)
-    return /^\d+$/.test(route.params.id);
+    return /^\d+$/.test(route.params.id)
   },
-});
+})
 </script>
 ```
 
@@ -181,10 +181,10 @@ definePageMeta({
 <script setup lang="ts">
 definePageMeta({
   layout: false, // 默认不使用布局
-});
+})
 
 function enableCustomLayout() {
-  setPageLayout("custom"); // 开启 custom 布局
+  setPageLayout('custom') // 开启 custom 布局
 }
 </script>
 
@@ -218,7 +218,7 @@ function enableCustomLayout() {
 <script setup lang="ts">
 definePageMeta({
   layout: false,
-});
+})
 </script>
 
 <template>
@@ -264,9 +264,9 @@ pages/index.vue
 ```vue
 <script lang="ts" setup>
 // 静态导入, 兼容服务器端
-import "~/assets/css/style.css";
+import '~/assets/css/style.css'
 // 动态导入, 不兼容服务器端
-import("~/assets/css/style.css");
+import('~/assets/css/style.css')
 </script>
 ```
 
@@ -276,8 +276,8 @@ nuxt.config.ts
 
 ```ts
 export default defineNuxtConfig({
-  css: ["~/assets/css/global.css"],
-});
+  css: ['~/assets/css/global.css'],
+})
 ```
 
 ### animate.css
@@ -292,21 +292,21 @@ pnpm install animate.css
 <!-- 在 script 标签中使用 -->
 <script lang="ts" setup>
 /** 打包的 HTML 文件将内联 animated.css, 不会分包  */
-import "animate.css";
+import 'animate.css'
 </script>
 
 <!-- 在 style 标签中使用 -->
 <style lang="css">
 /** 打包的 HTML 文件将内联 animated.css, 不会分包  */
-@import url("animate.css");
+@import url('animate.css');
 </style>
 ```
 
 ```ts [在 nuxt.config.ts 中全局使用]
 /** 打包的所有 HTML 文件将内联 animated.css, 不会分包  */
 export default defineNuxtConfig({
-  css: ["animate.css"],
-});
+  css: ['animate.css'],
+})
 ```
 
 :::
@@ -321,13 +321,13 @@ export default defineNuxtConfig({
     head: {
       link: [
         {
-          rel: "stylesheet",
-          href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css",
+          rel: 'stylesheet',
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',
         },
       ],
     },
   },
-});
+})
 ```
 
 ### 使用预处理器
@@ -339,15 +339,15 @@ export default defineNuxtConfig({
 ```vue [在组件中使用]
 <style lang="scss">
 // 打包的 HTML 文件将内联 global.scss, 不会分包
-@use "~/assets/scss/global.scss";
+@use '~/assets/scss/global.scss';
 </style>
 ```
 
 ```ts [在 nuxt.config.ts 中全局使用]
 // 打包的所有 HTML 文件将内联 global.scss, 不会分包
 export default defineNuxtConfig({
-  css: ["~/assets/scss/global.scss"],
-});
+  css: ['~/assets/scss/global.scss'],
+})
 ```
 
 :::
@@ -358,31 +358,29 @@ export default defineNuxtConfig({
 
 ```vue [ref/reactive]
 <script setup lang="ts">
-const isActive = ref(true);
-const hasError = ref(false);
+const isActive = ref(true)
+const hasError = ref(false)
 const classObject = reactive({
   active: true,
-  "text-danger": false,
-});
+  'text-danger': false,
+})
 </script>
 
 <template>
-  <div class="static" :class="{ active: isActive, 'text-danger': hasError }">
-    Nuxt
-  </div>
+  <div class="static" :class="{ active: isActive, 'text-danger': hasError }">Nuxt</div>
   <div :class="classObject">Nuxt</div>
 </template>
 ```
 
 ```vue [computed 计算属性]
 <script setup lang="ts">
-const isActive = ref(true);
-const error = ref<{ type: string } | null>(null);
+const isActive = ref(true)
+const error = ref<{ type: string } | null>(null)
 
 const classObject = computed(() => ({
   active: isActive.value && !error.value,
-  "text-danger": error.value && error.value.type === "fatal",
-}));
+  'text-danger': error.value && error.value.type === 'fatal',
+}))
 </script>
 
 <template>
@@ -392,8 +390,8 @@ const classObject = computed(() => ({
 
 ```vue [动态类名数组]
 <script setup lang="ts">
-const isActive = ref(true);
-const errorClass = ref("text-danger");
+const isActive = ref(true)
+const errorClass = ref('text-danger')
 </script>
 
 <template>
@@ -403,7 +401,7 @@ const errorClass = ref("text-danger");
 
 ```vue [v-bind 动态样式]
 <script setup lang="ts">
-const color = ref("#ff0000");
+const color = ref('#ff0000')
 </script>
 
 <template>
@@ -452,9 +450,9 @@ SSR 对 SEO 友好
 ```ts
 export default defineNuxtConfig({
   app: {
-    pageTransition: { name: "page", mode: "out-in" },
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
-});
+})
 ```
 
 编写页面过渡效果的样式
@@ -532,9 +530,9 @@ definePageMeta({
   // 可以通过 definePageMeta 宏函数指定 pageTransition 属性
   // 设置特定路由的页面过渡效果, 可以覆盖全局页面过渡效果
   pageTransition: {
-    name: "rotate", // 该路由使用 rotate 页面过渡效果
+    name: 'rotate', // 该路由使用 rotate 页面过渡效果
   },
-});
+})
 </script>
 ```
 
@@ -547,9 +545,9 @@ definePageMeta({
 ```ts
 export default defineNuxtConfig({
   app: {
-    layoutTransition: { name: "layout", mode: "out-in" },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
-});
+})
 ```
 
 编写布局过渡效果的样式
@@ -584,11 +582,11 @@ export default defineNuxtConfig({
 definePageMeta({
   // 可以通过 definePageMeta 宏函数指定 layoutTransition 属性
   // 设置特定路由的布局过渡效果, 可以覆盖全局布局过渡效果
-  layout: "lightblue", // 该路由使用 lightblue 布局
+  layout: 'lightblue', // 该路由使用 lightblue 布局
   layoutTransition: {
-    name: "fade", // 该路由使用 fade 布局过渡效果
+    name: 'fade', // 该路由使用 fade 布局过渡效果
   },
-});
+})
 </script>
 ```
 
@@ -609,18 +607,18 @@ export default defineNuxtConfig({
       // css 类名
       // .fade-enter-from .fade-enter-active .fade-enter-to
       // .fade-leave-from .fade-leave-active .fade-leave-to
-      name: "fade",
-      mode: "out-in", // 默认值
+      name: 'fade',
+      mode: 'out-in', // 默认值
     },
     layoutTransition: {
       // css 类名
       // .slide-enter-from .slide-enter-active .slide-enter-to
       // .slide-leave-from .slide-leave-active .slide-leave-to
-      name: "slide",
-      mode: "out-in", // 默认值
+      name: 'slide',
+      mode: 'out-in', // 默认值
     },
   },
-});
+})
 ```
 
 在 app.vue 中使用 `<NuxtPage>` 时，可以传递过渡效果对象, 作为组件属性, 以设置全局过渡效果
@@ -652,7 +650,7 @@ export default defineNuxtConfig({
 definePageMeta({
   pageTransition: false,
   layoutTransition: false,
-});
+})
 </script>
 ```
 
@@ -664,7 +662,7 @@ defineNuxtConfig({
     pageTransition: false,
     layoutTransition: false,
   },
-});
+})
 ```
 
 ### JS 钩子 (适用于 GSAP 等动画库)
@@ -699,8 +697,8 @@ definePageMeta({
 <script setup lang="ts">
 definePageMeta({
   pageTransition: {
-    name: "slide-right", // 默认使用 slide-right 页面过渡效果
-    mode: "out-in", // 默认值
+    name: 'slide-right', // 默认使用 slide-right 页面过渡效果
+    mode: 'out-in', // 默认值
   },
   middleware(to: any, from: any) {
     // 条件过渡效果
@@ -708,11 +706,11 @@ definePageMeta({
       // id 小到大: 使用 slide-left 页面过渡效果
       // id 大到小: 使用 slide-right 页面过渡效果
       Number.parseInt(to.params.id) > Number.parseInt(from.params.id)
-        ? "slide-left" // slide-left: leave-to <--- 500px --- id <--- 500px --- enter-from
-        : "slide-right"; // slide-right: enter-from --- 500px ---> id --- 500px ---> leave-to
+        ? 'slide-left' // slide-left: leave-to <--- 500px --- id <--- 500px --- enter-from
+        : 'slide-right' // slide-right: enter-from --- 500px ---> id --- 500px ---> leave-to
   },
-});
-const route = useRoute();
+})
+const route = useRoute()
 </script>
 
 <template>
@@ -743,10 +741,10 @@ const route = useRoute();
 
 ```vue [layouts/default.vue]
 <script setup lang="ts">
-const route = useRoute();
-const id = computed(() => Number(route.params.id ?? 1));
-const subId = computed(() => `/${id.value - 1}`);
-const addId = computed(() => `/${id.value + 1}`);
+const route = useRoute()
+const id = computed(() => Number(route.params.id ?? 1))
+const subId = computed(() => `/${id.value - 1}`)
+const addId = computed(() => `/${id.value + 1}`)
 </script>
 
 <template>
@@ -786,16 +784,16 @@ useFetch 和 useAsyncData 组合函数, 可以避免浏览器 Hydration 时重�
 ```vue
 <script setup lang="ts">
 // useFetch 用于获取数据
-const { data } = await useFetch("/api/data");
+const { data } = await useFetch('/api/data')
 
 async function handleFormSubmit() {
   // $fetch 函数: 适用于用户交互事件
-  const res = await $fetch("/api/submit", {
-    method: "POST",
+  const res = await $fetch('/api/submit', {
+    method: 'POST',
     body: {
       // form data
     },
-  });
+  })
 }
 </script>
 
@@ -837,7 +835,7 @@ useFetch 组合函数是对 useAsyncData 和 $fetch 的封装
 
 ```vue
 <script setup lang="ts">
-const { data: count } = await useFetch("/api/count");
+const { data: count } = await useFetch('/api/count')
 </script>
 
 <template>页面访问量: {{ count }}</template>
@@ -861,9 +859,9 @@ const { data: count } = await useFetch("/api/count");
 <script setup lang="ts">
 // 第一个参数 key 是标识第二个参数 (查询函数 handler) 响应的缓存的唯一键
 const { data, error, status /** refresh, clear */ } = await useAsyncData(
-  "key", // key
-  () => $fetch("url"), // handler
-);
+  'key', // key
+  () => $fetch('url'), // handler
+)
 </script>
 ```
 
@@ -871,9 +869,9 @@ const { data, error, status /** refresh, clear */ } = await useAsyncData(
 
 ```vue
 <script setup lang="ts">
-const { status, data } = useFetch("/api/posts", {
+const { status, data } = useFetch('/api/posts', {
   lazy: true,
-});
+})
 // 等价于 const { status, data } = useLazyFetch("/api/posts")
 </script>
 
@@ -889,13 +887,13 @@ const { status, data } = useFetch("/api/posts", {
 
 ```ts
 /* 服务器 (SSR 时), 客户端都执行的数据获取  */
-const articles = await useFetch("/api/article");
+const articles = await useFetch('/api/article')
 
 /* 仅客户端执行的数据获取 */
-const { status, data: comments } = useFetch("/api/comments", {
+const { status, data: comments } = useFetch('/api/comments', {
   lazy: true,
   server: false,
-});
+})
 ```
 
 useFetch/useAsyncData 等组合函数必须在 setup 函数中调用, 或者在生命周期函数的顶层调用, 否则应该使用 $fetch 函数
@@ -907,13 +905,13 @@ pick 可以过滤响应数据的有效字段, 减小有效负载的大小
 ```vue
 <script lang="ts" setup>
 // 第一个参数 key 是标识第二个参数 (查询函数 handler) 响应的缓存的唯一键
-const { data: payload } = await useAsyncData("key", () => $fetch("url"));
-console.log(payload.value); // { code: 200, message: 'ok', data: {...} }
+const { data: payload } = await useAsyncData('key', () => $fetch('url'))
+console.log(payload.value) // { code: 200, message: 'ok', data: {...} }
 
-const { data: payload2 } = await useAsyncData("key2", () => $fetch("url"), {
-  pick: ["data"],
-});
-console.log(payload2.value); // { data: {...} } 减小有效负载的大小
+const { data: payload2 } = await useAsyncData('key2', () => $fetch('url'), {
+  pick: ['data'],
+})
+console.log(payload2.value) // { data: {...} } 减小有效负载的大小
 </script>
 ```
 
@@ -921,13 +919,13 @@ console.log(payload2.value); // { data: {...} } 减小有效负载的大小
 
 ```vue
 <script setup lang="ts">
-const id = ref(1);
+const id = ref(1)
 
 const { data, error, refresh } = await useFetch(`/api/users/${id.value}`, {
   // id 改变时, 自动触发 refetch, 但 URL 始终是 /api/users/1
   // 如果需要响应式的 URL, 则使用计算属性, 或计算 URL
   watch: [id],
-});
+})
 </script>
 ```
 
@@ -935,13 +933,13 @@ const { data, error, refresh } = await useFetch(`/api/users/${id.value}`, {
 
 ```vue
 <script setup lang="ts">
-const id = ref(null);
+const id = ref(null)
 
-const { data, status } = useLazyFetch("/api/user", {
+const { data, status } = useLazyFetch('/api/user', {
   query: {
     user_id: id, // id 改变时, 自动触发 refetch, 并且 URL 是响应式的 `/api/user?user_id=${id}`
   },
-});
+})
 </script>
 ```
 
@@ -949,16 +947,16 @@ const { data, status } = useLazyFetch("/api/user", {
 
 ```vue
 <script setup lang="ts">
-const id = ref(null);
+const id = ref(null)
 
 // lazy: 先进行路由导航, 再获取异步数据
 const { data, status } = useLazyFetch(() => `/api/users/${id.value}`, {
   // 不立即执行, 即不会 fetch(`/api/users/${null}`)
   // 等待 ID 改变后, 才 fetch(`/api/users/${id.value}`)
   immediate: false,
-});
+})
 
-const pending = computed(() => status.value === "pending");
+const pending = computed(() => status.value === 'pending')
 </script>
 
 <template>
@@ -979,15 +977,15 @@ const pending = computed(() => status.value === "pending");
 
 ```ts [服务器 server/api/foo.ts]
 export default defineEventHandler(() => {
-  const thisObj = new Date();
-  return thisObj; // 使用 JSON.stringify() 序列化
-});
+  const thisObj = new Date()
+  return thisObj // 使用 JSON.stringify() 序列化
+})
 ```
 
 ```vue [客户端 app.vue]
 <script setup lang="ts">
 // 虽然服务器返回一个 Date 对象, 但是 data 被推断为字符串类型
-const { data } = await useFetch("/api/foo");
+const { data } = await useFetch('/api/foo')
 </script>
 ```
 
@@ -1010,12 +1008,12 @@ export default defineEventHandler(() => {
           month: this.createdAt.getMonth() + 1,
           day: this.createdAt.getDate(),
         },
-      };
+      }
     },
-  };
+  }
 
-  return thisObj;
-});
+  return thisObj
+})
 ```
 
 ```vue [客户端 app.vue]
@@ -1028,7 +1026,7 @@ export default defineEventHandler(() => {
 //     day: number
 //   },
 // }
-const { data } = await useFetch("/api/bar");
+const { data } = await useFetch('/api/bar')
 </script>
 ```
 
@@ -1051,9 +1049,9 @@ const { data } = await useFetch("/api/bar");
 ```vue
 <script setup lang="ts">
 const counter = useState(
-  "counter" /** key */,
+  'counter' /** key */,
   () => Math.round(Math.random() * 100) /** initializer */,
-);
+)
 </script>
 
 <template>
@@ -1071,11 +1069,11 @@ const counter = useState(
 
 ```vue
 <script setup lang="ts">
-const myState = useState("key");
+const myState = useState('key')
 
 await callOnce(async () => {
-  myState.value = await $fetch("url");
-});
+  myState.value = await $fetch('url')
+})
 </script>
 ```
 
@@ -1092,23 +1090,23 @@ pnpx nuxi@latest module add pinia
 ::: code-group
 
 ```ts [store/user.ts]
-export const useUserStore = defineStore("user", () => {
-  const name = ref("");
-  const age = ref(0);
+export const useUserStore = defineStore('user', () => {
+  const name = ref('')
+  const age = ref(0)
 
   const fetch = () => {
-    const data = await $fetch("url");
-    name.value = data.name;
-    age.value = data.age;
-  };
-});
+    const data = await $fetch('url')
+    name.value = data.name
+    age.value = data.age
+  }
+})
 ```
 
 ```vue [app.vue]
 <script setup lang="ts">
-const userStore = useUserStore();
+const userStore = useUserStore()
 
-await callOnce(userStore.fetch);
+await callOnce(userStore.fetch)
 </script>
 
 <template>
@@ -1135,8 +1133,8 @@ composables 目录下的组合函数可以自动导入
 ```ts
 // composables/useFoo.ts
 export const useFoo = () => {
-  return useState("foo" /** key */, () => "foo" /** initializer */);
-};
+  return useState('foo' /** key */, () => 'foo' /** initializer */)
+}
 ```
 
 可以默认导出, auto-import: useBar
@@ -1144,7 +1142,7 @@ export const useFoo = () => {
 ```ts
 // composables/useBar.ts
 export default function () {
-  return useState("bar" /** key */, () => "bar" /** initializer */);
+  return useState('bar' /** key */, () => 'bar' /** initializer */)
 }
 ```
 
@@ -1153,13 +1151,13 @@ export default function () {
 export default defineNuxtConfig({
   imports: {
     dirs: [
-      "composables", // 扫描顶层文件 (扫描深度 = 0)
+      'composables', // 扫描顶层文件 (扫描深度 = 0)
       // 扫描深度 = 1, 文件名 index, 拓展名 ts,js,mts,mjs
-      "composables/*/index.{ts,js,mts,mjs}",
-      "composables/**", // 扫描所有文件
+      'composables/*/index.{ts,js,mts,mjs}',
+      'composables/**', // 扫描所有文件
     ],
   },
-});
+})
 ```
 
 ```bash
@@ -1178,29 +1176,29 @@ pages/about.vue 和 pages/index.vue 的状态: foo, bar, baz 在所有组件和�
 ```ts [composables/useFoo.ts]
 // 命名导出
 export const useFoo = () => {
-  return useState("foo", () => 3);
-};
+  return useState('foo', () => 3)
+}
 ```
 
 ```ts [composables/useBar.ts]
 // 默认导出
 export default function () {
-  return useState("bar", () => 7);
+  return useState('bar', () => 7)
 }
 ```
 
 ```vue [pages/index.vue]
 <script setup lang="ts">
-const useBar = () => useState("bar", () => 3);
-const useFoo = () => useState("foo", () => 4);
-const bar = useBar();
-const foo = useFoo();
-const addBar = () => bar.value++;
-const addFoo = () => foo.value++;
+const useBar = () => useState('bar', () => 3)
+const useFoo = () => useState('foo', () => 4)
+const bar = useBar()
+const foo = useFoo()
+const addBar = () => bar.value++
+const addFoo = () => foo.value++
 
-const useBaz = () => useState("baz", () => 5);
-const baz = useBaz();
-const addBaz = () => baz.value++;
+const useBaz = () => useState('baz', () => 5)
+const baz = useBaz()
+const addBaz = () => baz.value++
 </script>
 
 <template>
@@ -1218,16 +1216,16 @@ const addBaz = () => baz.value++;
 
 ```vue [pages/about.vue]
 <script setup lang="ts">
-const useBar = () => useState("bar", () => 3);
-const useFoo = () => useState("foo", () => 4);
-const bar = useBar();
-const foo = useFoo();
-const addBar = () => bar.value++;
-const addFoo = () => foo.value++;
+const useBar = () => useState('bar', () => 3)
+const useFoo = () => useState('foo', () => 4)
+const bar = useBar()
+const foo = useFoo()
+const addBar = () => bar.value++
+const addFoo = () => foo.value++
 
-const useBaz = () => useState("baz", () => 5);
-const baz = useBaz();
-const addBaz = () => baz.value++;
+const useBaz = () => useState('baz', () => 5)
+const baz = useBaz()
+const addBaz = () => baz.value++
 </script>
 
 <template>
@@ -1266,19 +1264,19 @@ Nuxt 是一个全栈框架, 可能发生无法预防的运行时错误
 export default defineNuxtPlugin((nuxtApp) => {
   // 打印所有 Vue 错误, 包括已处理的错误
   nuxtApp.vueApp.config.errorHandler = (error, instance, info) => {
-    console.log(error, instance, info);
-  };
+    console.log(error, instance, info)
+  }
 
   // 等价于
-  nuxtApp.hook("vue:error", (error, instance, info) => {
-    console.log(error, instance, info);
-  });
+  nuxtApp.hook('vue:error', (error, instance, info) => {
+    console.log(error, instance, info)
+  })
 
   // 打印所有启动错误
-  nuxtApp.hook("app:error", (error) => {
-    console.log(error);
-  });
-});
+  nuxtApp.hook('app:error', (error) => {
+    console.log(error)
+  })
+})
 ```
 
 ### 编写全局错误页面
@@ -1288,16 +1286,16 @@ export default defineNuxtPlugin((nuxtApp) => {
 ```vue
 <!-- error.vue -->
 <script setup lang="ts">
-import type { NuxtError } from "#app";
+import type { NuxtError } from '#app'
 
 defineProps<{
-  error: NuxtError;
-}>();
+  error: NuxtError
+}>()
 
 const handleError = () => {
   // 清除当前的 Nuxt 错误, 并导航到指定页面
-  clearError({ redirect: "/" });
-};
+  clearError({ redirect: '/' })
+}
 </script>
 
 <template>
@@ -1329,9 +1327,9 @@ throw createError({
     timestamp: new Date(),
   },
   statusCode: 500,
-  statusMessage: "致命错误",
+  statusMessage: '致命错误',
   fatal: true,
-});
+})
 ```
 
 `showError()` 手动触发全局错误页面
@@ -1344,7 +1342,7 @@ Nuxt 提供了 `<NuxtErrorBoundary>` 组件, 处理客户端组件渲染错误, 
 
 ```vue
 <script lang="ts" setup>
-const errorLogger = (err: unknown) => console.error(err);
+const errorLogger = (err: unknown) => console.error(err)
 </script>
 
 <template>
@@ -1378,17 +1376,17 @@ const errorLogger = (err: unknown) => console.error(err);
 
 ```ts [server/api/hello.ts]
 export default defineEventHandler((event) => {
-  return { hello: "Nitro" };
+  return { hello: 'Nitro' }
   // return JSON.stringify({ hello: "Nitro" });
   // return Promise.resolve("Nitro");
   // event.node.res.end({ hello: "Nitro" }); return;
-});
+})
 ```
 
 ```vue [pages/index.vue]
 <script setup lang="ts">
-const { clear, data, error, refresh, status } = await useFetch("/api/hello");
-console.log(data.value); // { hello: 'Nitro' }
+const { clear, data, error, refresh, status } = await useFetch('/api/hello')
+console.log(data.value) // { hello: 'Nitro' }
 </script>
 ```
 
@@ -1416,10 +1414,10 @@ export default defineEventHandler((event) => {
 
   // 新请求的 URL: http://localhost:3000/api/hello
   // context 的键名数组: [ 'nitro', '_nitro', 'auth', 'matchedRoute', 'params', '_payloadReducers' ]
-  console.log("新请求的 URL:", getRequestURL(event).href);
-  console.log("context 的键名数组:", Object.keys(event.context));
-  event.context.auth = { timestamp: Date.now() };
-});
+  console.log('新请求的 URL:', getRequestURL(event).href)
+  console.log('context 的键名数组:', Object.keys(event.context))
+  event.context.auth = { timestamp: Date.now() }
+})
 ```
 
 ### 动态路由参数
@@ -1428,15 +1426,15 @@ export default defineEventHandler((event) => {
 
 ```ts [server/api/hello/[name].ts]
 export default defineEventHandler(async (event) => {
-  const name = getRouterParam(event, "name");
-  return `Hello ${name}`;
-});
+  const name = getRouterParam(event, 'name')
+  return `Hello ${name}`
+})
 ```
 
 ```vue [pages/index.vue]
 <script setup lang="ts">
-const { data } = await useFetch("/api/hello/Yukino");
-console.log(data); // Hello Yukino
+const { data } = await useFetch('/api/hello/Yukino')
+console.log(data) // Hello Yukino
 </script>
 ```
 
@@ -1449,11 +1447,11 @@ console.log(data); // Hello Yukino
 ::: code-group
 
 ```ts [server/api/test.get.ts]
-export default defineEventHandler(() => "Get test");
+export default defineEventHandler(() => 'Get test')
 ```
 
 ```ts [server/api/test.post.ts]
-export default defineEventHandler(() => "Post test");
+export default defineEventHandler(() => 'Post test')
 ```
 
 :::
@@ -1465,19 +1463,15 @@ export default defineEventHandler(() => "Post test");
 ::: code-group
 
 ```ts [server/api/foo/index.get.ts]
-export default defineEventHandler((event) => event.node.res.end("GET api/foo"));
+export default defineEventHandler((event) => event.node.res.end('GET api/foo'))
 ```
 
 ```ts [server/api/foo/index.post.ts]
-export default defineEventHandler((event) =>
-  event.node.res.end("POST api/foo"),
-);
+export default defineEventHandler((event) => event.node.res.end('POST api/foo'))
 ```
 
 ```ts [/server/api/foo/bar.get.ts]
-export default defineEventHandler((event) =>
-  event.node.res.end("GET api/foo/bar"),
-);
+export default defineEventHandler((event) => event.node.res.end('GET api/foo/bar'))
 ```
 
 :::
@@ -1490,8 +1484,8 @@ export default defineEventHandler((event) =>
 ```ts
 // server/api/foo/[...slug].ts
 export default defineEventHandler((event) => {
-  return `匹配失败的路由段: ${event.context.params.slug}`;
-});
+  return `匹配失败的路由段: ${event.context.params.slug}`
+})
 ```
 
 ### 解析请求体 `readBody`
@@ -1502,18 +1496,18 @@ readBody 只能在 POST endpoint 中使用, 在 GET endpoint 中使用时, 会�
 
 ```ts [server/api/submit.post.ts]
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  return { body };
-});
+  const body = await readBody(event)
+  return { body }
+})
 ```
 
 ```vue [app.vue]
 <script setup lang="ts">
 async function submit() {
-  const { body } = await $fetch("/api/submit", {
-    method: "post",
+  const { body } = await $fetch('/api/submit', {
+    method: 'post',
     body: { test: 123 },
-  });
+  })
 }
 </script>
 ```
@@ -1531,22 +1525,22 @@ async function submit() {
 // Query parameters 查询参数
 // 示例查询 /api/ab?a=foo&b=bar
 export default defineEventHandler((event) => {
-  const params = getQuery(event);
+  const params = getQuery(event)
   // { p1: foo, p2: bar };
-  return { p1: params.a, p2: params.b };
-});
+  return { p1: params.a, p2: params.b }
+})
 ```
 
 ```ts [server/api/hello/[name].get.ts]
 // Path/Router parameters 路径参数
 // 示例查询 /api/hello/Yukino
 export default defineEventHandler(async (event) => {
-  const name = event.context.params?.name;
-  const name2 = getRouterParam(event, "name"); // 推荐
-  console.log(name === name2); // true
+  const name = event.context.params?.name
+  const name2 = getRouterParam(event, 'name') // 推荐
+  console.log(name === name2) // true
   // Hello Yukino
-  return `Hello ${name2}`;
-});
+  return `Hello ${name2}`
+})
 ```
 
 :::
@@ -1561,18 +1555,18 @@ export default defineEventHandler(async (event) => {
 ```ts
 // server/api/validation/[id].ts
 export default defineEventHandler((event) => {
-  const id = Number.parseInt(event.context.params?.id);
+  const id = Number.parseInt(event.context.params?.id)
   if (!Number.isInteger(id)) {
     throw createError({
       // 抛出 createError 函数创建的错误, 返回其他 4xx/5xx 状态码
       statusCode: 400, // 400 Bad Request
-      statusMessage: "ID 校验失败",
-    });
+      statusMessage: 'ID 校验失败',
+    })
   }
   // 使用 setResponseStatus 函数, 返回其他 2xx 状态码
-  setResponseStatus(event, 202); // 202 Accepted
-  return "ID 校验成功";
-});
+  setResponseStatus(event, 202) // 202 Accepted
+  return 'ID 校验成功'
+})
 ```
 
 ### runtimeConfig 运行时配置
@@ -1583,23 +1577,23 @@ nuxt.config.ts 中的 runtimeConfig: 需要在构建后使用环境变量指定�
 
 ```ts [server/api/runtimeConfig.ts]
 export default defineEventHandler(async (event) => {
-  const runtimeConfig = useRuntimeConfig(event);
+  const runtimeConfig = useRuntimeConfig(event)
   // { public: { myToken: 'my-token' }, myServerToken: 'my-server-token' }
-  console.log("runtimeConfig:", runtimeConfig);
-  return { runtimeConfig };
-});
+  console.log('runtimeConfig:', runtimeConfig)
+  return { runtimeConfig }
+})
 ```
 
 ```vue [pages/index.vue]
 <script lang="ts" setup>
-const { data } = await useFetch("/api/runtimeConfig");
-const runtimeConfigFromServer = data.value?.runtimeConfig;
+const { data } = await useFetch('/api/runtimeConfig')
+const runtimeConfigFromServer = data.value?.runtimeConfig
 // { public: { myToken: 'my-token' }, myServerToken: 'my-server-token' }
-console.log(runtimeConfigFromServer);
+console.log(runtimeConfigFromServer)
 
-const runtimeConfig = useRuntimeConfig();
+const runtimeConfig = useRuntimeConfig()
 // { public: { myToken: 'my-token' }}
-console.log(runtimeConfig);
+console.log(runtimeConfig)
 </script>
 ```
 
@@ -1608,13 +1602,13 @@ export default defineNuxtConfig({
   // nuxt.config.ts 中定义的 runtimeConfig
   runtimeConfig: {
     // 只在服务器端可用的私有键
-    myServerToken: "",
+    myServerToken: '',
     public: {
       // public 中的键在客户端也可用
-      myToken: "",
+      myToken: '',
     },
   },
-});
+})
 ```
 
 ```bash [.env]
@@ -1629,9 +1623,9 @@ NUXT_PUBLIC_MY_TOKEN='my-token' # 需要添加 NUXT_PUBLIC_ 前缀 (默认)
 ```ts
 // server/api/cookies.ts
 export default defineEventHandler((event) => {
-  const cookies = parseCookies(event);
-  return { cookies };
-});
+  const cookies = parseCookies(event)
+  return { cookies }
+})
 ```
 
 ### Awaiting Promises After Response
@@ -1646,31 +1640,31 @@ const timeConsumingBackgroundTask = async () => {
   console.log(
     await new Promise((resolve) =>
       setTimeout(() => {
-        resolve("Time consuming background task done");
+        resolve('Time consuming background task done')
       }, 3000),
     ),
-  );
-};
+  )
+}
 
 export default eventHandler((event) => {
-  event.waitUntil(timeConsumingBackgroundTask());
-  return "pong";
-});
+  event.waitUntil(timeConsumingBackgroundTask())
+  return 'pong'
+})
 ```
 
 ```ts [server/api/background-task2.ts]
 const timeConsumingBackgroundTask = async () => {
   return new Promise((resolve) =>
     setTimeout(() => {
-      resolve("Time consuming background task2 done");
+      resolve('Time consuming background task2 done')
     }, 3000),
-  );
-};
+  )
+}
 
 export default eventHandler(async (event) => {
-  event.node.res.end("pong");
-  console.log(await timeConsumingBackgroundTask());
-});
+  event.node.res.end('pong')
+  console.log(await timeConsumingBackgroundTask())
+})
 ```
 
 :::
@@ -1685,26 +1679,26 @@ export default defineNuxtConfig({
   nitro: {
     storage: {
       redis: {
-        driver: "redis",
+        driver: 'redis',
         port: 6379,
-        host: "127.0.0.1",
+        host: '127.0.0.1',
         db: 0,
       },
     },
   },
-});
+})
 ```
 
 ```ts [server/api/storage/test.ts]
 export default defineEventHandler(async (event) => {
   // KEYS *
-  const keys = await useStorage("redis").getKeys();
+  const keys = await useStorage('redis').getKeys()
   // SET foo bar
-  await useStorage("redis").setItem("foo", "bar");
+  await useStorage('redis').setItem('foo', 'bar')
   // DEL foo bar
-  await useStorage("redis").removeItem("foo");
-  return {};
-});
+  await useStorage('redis').removeItem('foo')
+  return {}
+})
 ```
 
 :::
@@ -1714,28 +1708,28 @@ export default defineEventHandler(async (event) => {
 ::: code-group
 
 ```ts [server/plugins/storage.ts]
-import redisDriver from "unstorage/drivers/redis";
+import redisDriver from 'unstorage/drivers/redis'
 
 export default defineNitroPlugin(() => {
-  const storage = useStorage();
+  const storage = useStorage()
   const driver = redisDriver({
-    base: "redis",
+    base: 'redis',
     host: useRuntimeConfig().redis.host,
     port: useRuntimeConfig().redis.port,
-  });
-  storage.mount("redis", driver);
-});
+  })
+  storage.mount('redis', driver)
+})
 ```
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   runtimeConfig: {
     redis: {
-      host: "",
+      host: '',
       port: 0,
     },
   },
-});
+})
 ```
 
 ```bash [.env]

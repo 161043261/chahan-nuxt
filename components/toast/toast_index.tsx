@@ -101,7 +101,7 @@ export default defineComponent(
       <div>
         <Transition name="fade">
           {isAlive.value ? (
-            <div class="border-1st fixed top-[10%] left-[50%] z-100 -translate-x-[50%] rounded-lg border-[3px] p-[5px]">
+            <div class="border-1st z-100 fixed left-[50%] top-[10%] -translate-x-[50%] rounded-lg border-[3px] p-[5px]">
               <div class="flex items-center gap-[5px]">
                 {
                   ((type: string) => {

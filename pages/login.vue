@@ -82,7 +82,7 @@ const handleRegister = () => {
 <template>
   <main class="bg h-dvh bg-cover bg-center bg-no-repeat">
     <div
-      class="glass-container absolute top-[50%] left-[10%] h-[300px] w-[456px] translate-y-[-50%] rounded-3xl p-[50px]"
+      class="glass-container absolute left-[10%] top-[50%] h-[300px] w-[456px] translate-y-[-50%] rounded-3xl p-[50px]"
     >
       <div class="mb-[20px] flex items-center justify-center gap-[10px]">
         <Rice theme="filled" size="48" fill="#b8e986" :stroke-width="3" />
@@ -124,7 +124,7 @@ const handleRegister = () => {
 }
 
 .bg {
-  background-image: url('~/assets/imgs/bg.jpg');
+  background-image: url('~/assets/img/bg.jpg');
 }
 
 .glass-container {
