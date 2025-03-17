@@ -1,6 +1,6 @@
 import { randNum } from '~/utils'
 import { mockRevenueList } from '../mock/revenue'
-import type { Resp } from '~/types/resp'
+import type { Res } from '~/types/resp'
 import type { IRevenueItem } from '~/types/dashboard'
 
 export default defineEventHandler(async (/** event */) => {
@@ -9,5 +9,5 @@ export default defineEventHandler(async (/** event */) => {
   return {
     msg: '获取营收排行榜成功',
     data: revenueList,
-  } as Resp<IRevenueItem[]>
+  } as Res<IRevenueItem[]>
 })

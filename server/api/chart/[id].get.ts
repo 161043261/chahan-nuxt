@@ -1,5 +1,5 @@
 import type { ChartData, ChartData2, ChartData3 } from '~/types/chart'
-import type { Resp } from '~/types/resp'
+import type { Res } from '~/types/resp'
 import { randArr, randNum } from '~/utils'
 
 export default defineEventHandler(async (event) => {
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
           { name: '炒饭B', data: randNum(1, 100) },
           { name: '炒饭C', data: randNum(1, 100) },
         ],
-      } as Resp<ChartData>
+      } as Res<ChartData>
 
     case 2:
       return {
@@ -28,12 +28,12 @@ export default defineEventHandler(async (event) => {
           { name: '充电时长', data: randArr(1, 100, 9) },
           { name: '充电量', data: randArr(1, 100, 9) },
         ],
-      } as Resp<ChartData2>
+      } as Res<ChartData2>
 
     case 3:
       return {
         msg: '获取五边形数据成功',
         data: randArr(1, 100, 5),
-      } as Resp<ChartData3>
+      } as Res<ChartData3>
   }
 })

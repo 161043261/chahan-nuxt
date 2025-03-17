@@ -2,7 +2,7 @@
 import { Lock, Rice, User } from '@icon-park/vue-next'
 import { ElButton, ElForm, ElFormItem, ElInput, ElMessage, type FormRules } from 'element-plus'
 import { useUserState } from '~/composables/useUser.state'
-import type { Resp } from '~/types/resp'
+import type { Res } from '~/types/resp'
 
 // macros
 definePageMeta({
@@ -63,7 +63,7 @@ const handleRegister = () => {
       return
     }
     try {
-      const data = await $fetch<Resp<string>>('/api/user/register', {
+      const data = await $fetch<Res<string>>('/api/user/register', {
         method: 'POST',
         body: formData,
       })

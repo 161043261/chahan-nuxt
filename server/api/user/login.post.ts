@@ -3,8 +3,8 @@ import bcrypt from 'bcryptjs'
 import type { H3Event } from 'h3'
 import { UserSchema } from '~/server/models/user.schema'
 import { setAuth } from '~/server/utils/auth'
-import menu from '~/server/assets/menu.json'
-import type { Resp } from '~/types/resp'
+import menuList from '~/server/assets/menu_list.json'
+import type { Res } from '~/types/resp'
 import type { IMenuItem } from '~/types/user'
 
 export default defineEventHandler(async (event: H3Event) => {
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event: H3Event) => {
     msg: '登录成功',
     data: {
       token,
-      menu,
+      menuList,
     },
-  } as Resp<{ token: string; menu: IMenuItem[] }>
+  } as Res<{ token: string; menuList: IMenuItem[] }>
 })

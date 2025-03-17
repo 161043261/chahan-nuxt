@@ -1,4 +1,4 @@
-import type { Resp } from '~/types/resp'
+import type { Res } from '~/types/resp'
 import type { ILoginBody, IMenuItem } from '~/types/user'
 
 // 必须使用高阶函数
@@ -8,12 +8,12 @@ const _useUserState = () =>
     () => {
       //! sessionStorage is not defined
       // 菜单
-      const menu = [] as IMenuItem[]
+      const menuList = [] as IMenuItem[]
       // token
       const token = ''
 
       return {
-        menu,
+        menuList,
         token,
       }
     }, // initializer
@@ -25,8 +25,8 @@ async function login(body: ILoginBody) {
       body,
       method: 'POST',
       headers: [],
-    })) as Resp<{ token: string; menu: IMenuItem[] }>
-    _useUserState().value.menu = res.data.menu
+    })) as Res<{ token: string; menuList: IMenuItem[] }>
+    _useUserState().value.menuList = res.data.menuList
     _useUserState().value.token = res.data.token
   } catch (err) {
     if (import.meta.dev) {
@@ -37,7 +37,7 @@ async function login(body: ILoginBody) {
 
 function reset() {
   _useUserState().value = {
-    menu: [],
+    menuList: [],
     token: '',
   }
 }
@@ -53,7 +53,7 @@ export function useUserState() {
   const userState = _useUserState()
   return {
     loggedIn: computed(() => Boolean(userState.value.token)),
-    menu: computed(() => userState.value.menu),
+    menuList: computed(() => userState.value.menuList),
     token: computed(() => userState.value.token),
     login,
     reset,

@@ -1,4 +1,4 @@
-export interface Resp<T> {
+export interface Res<T> {
   msg: string
   data: T
 }

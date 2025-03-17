@@ -1,16 +1,18 @@
 <script lang="tsx" setup>
-import toast from '~/utils/toast'
 import { useUserState } from '~/composables/useUser.state'
+import RecursiveChild from '~/components/dashboard/recursive_child'
 import { useChart } from '~/composables/useChart'
 import getChartOption from './chart_option'
 import getChartOption2 from './chart_option2'
 import getChartOption3 from './chart_option3'
 import type { IRevenueItem, ITimeLineItem } from '~/types/dashboard'
 import { commaSep } from '~/utils/comma_sep'
-import bus from '~/utils/bus'
+// import bus from '~/utils/bus'
+import VirtualList from '~/components/virtual_list'
 
+import toast from '~/utils/toast'
 const userState = useUserState()
-const { menu } = userState
+const { menuList } = userState
 
 const chartRef = ref<HTMLDivElement | null>(null)
 const chartRef2 = ref<HTMLDivElement | null>(null)
@@ -82,7 +84,9 @@ const handleClick = (idx: 0 | 1 | 2, callbacks: (() => void)[]) => {
   }, 2000)
 }
 
-const virtualListRef = ref<InstanceType<typeof VirtualList>>()
+const virtualListRef = ref<InstanceType<typeof VirtualList> & {
+  updateLargeList: () => Promise<void>
+}>()
 const virtualListSize = ref<number>(0)
 
 // provide
@@ -93,17 +97,15 @@ provide('virtualListSize' /** key */, virtualListSize /** value */)
   <main>
     <ElRow :gutter="20">
       <ElCol :span="18">
-        <!--! 150px, 150px -->
         <ElCard class="h-[150px] !rounded-3xl">
           <template #header>
             <h1 class="text-[20px]">快捷方式</h1>
           </template>
           <div class="flex justify-center gap-[60px]">
-            <!-- <RecursiveChild v-for="item of menuList" :key="item.url" :item="item"/> -->
+            <RecursiveChild v-for="item of menuList" :key="item.url" :item="item" />
           </div>
         </ElCard>
 
-        <!--! 20px + 500px, 670px -->
         <ElCard class="mt-[20px] h-[500px] !rounded-3xl">
           <template #header>
             <div class="flex items-center gap-[10px]">
@@ -129,7 +131,6 @@ provide('virtualListSize' /** key */, virtualListSize /** value */)
           </ElRow>
         </ElCard>
 
-        <!--! 20px + 508px, 1198px -->
         <ElCard class="mt-[20px] !rounded-3xl">
           <template #header>
             <div class="flex items-center gap-[10px]">
@@ -148,11 +149,11 @@ provide('virtualListSize' /** key */, virtualListSize /** value */)
           <Suspense>
             <template #default>
               <VirtualList
+                ref="virtualListRef"
                 :item-height="50"
                 :render-func="renderFunc"
                 :height="400"
-                :get-large-list="getRevenueList"
-                ref="virtualListRef"
+                :large-list-url="'/api/revenue'"
               />
             </template>
             <template #fallback />
@@ -161,7 +162,6 @@ provide('virtualListSize' /** key */, virtualListSize /** value */)
       </ElCol>
 
       <ElCol :span="6">
-        <!--! 370px, 370px-->
         <ElCard class="h-[370px] !rounded-3xl">
           <template #header>
             <div class="flex items-center gap-[10px]">
@@ -180,7 +180,6 @@ provide('virtualListSize' /** key */, virtualListSize /** value */)
           <div ref="chartRef3" class="h-[240px] w-[100%]" />
         </ElCard>
 
-        <!--! 20px + 808px, 1198px -->
         <ElCard class="mt-[20px] h-[500px] !rounded-3xl">
           <ElTimeline class="overflow-auto">
             <ElTimelineItem
@@ -200,4 +199,31 @@ provide('virtualListSize' /** key */, virtualListSize /** value */)
   </main>
 </template>
 
-<style></style>
+<style scoped lang="scss">
+.rotate-x {
+  animation: rotateX 2s linear;
+}
+
+@keyframes rotateX {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-y {
+  animation: rotateY 2s linear infinite;
+  // transform-style: preserve-3d;
+}
+
+@keyframes rotateY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+</style>
