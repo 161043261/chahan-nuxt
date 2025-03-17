@@ -121,7 +121,7 @@ export default defineComponent(
               </div>
             </div>
           ) : (
-            ''
+            <></>
           )}
         </Transition>
       </div>

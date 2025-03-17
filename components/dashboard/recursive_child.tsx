@@ -7,6 +7,10 @@ interface IProps {
   item: IMenuItem
 }
 
+//! 1. defineComponent({ name, props, emits, slots, expose, setup })
+//! 2. defineComponent(setup, { name, props, emits, slots })
+//! setup: (props, { emit /** fn */, slots, expose /** fn */ }) => renderFunc
+//! renderFunc: () => <></>
 const RecursiveChild = defineComponent(
   (props: IProps) => {
     const router = useRouter()
