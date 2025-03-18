@@ -35,7 +35,10 @@ export default defineComponent(
           </ElHeader>
           <ElMain class="!h-[90vh]" ref="tabContainerRef">
             <LayoutTab watermarked={watermarked.value}>
-              {slots.default ? slots.default() : <></>}
+              {{
+                default: () => (slots.default ? slots.default() : <></>),
+              }}
+              {/* {slots.default ? slots.default() : <></>} */}
             </LayoutTab>
           </ElMain>
         </ElContainer>
