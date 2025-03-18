@@ -10,7 +10,7 @@ export function useChart(
   let chartInstance: echarts.ECharts | null = null
   const initChart = async () => {
     if (elemRef.value) {
-      chartInstance = echarts.init(elemRef.value)
+      chartInstance = echarts.init(elemRef.value, { ssr: true })
       chartInstance.setOption(await getChartOption())
     }
   }

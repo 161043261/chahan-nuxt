@@ -4,7 +4,7 @@ import type { ChartData2 } from '~/types/chart'
 import type { Res } from '~/types/resp'
 
 const getChartOption2 = async () => {
-  const { data: res } = await useFetch<Res<ChartData2>>('/api/chart/2')
+  const res = await $fetch/** useFetch */ <Res<ChartData2>>('/api/chart/2')
   const chartOption: ECOption = {
     title: {
       text: '机器人电量统计',
@@ -66,10 +66,10 @@ const getChartOption2 = async () => {
     ],
   }
 
-  ;(chartOption.legend as any).data = (res.value?.data ?? []).map(({ name }) => name)
-  for (let i = 0; i < (res.value?.data.length ?? 0); i++) {
-    ;(chartOption.series as any)[i].name = res.value!.data[i].name
-    ;(chartOption.series as any)[i].data = res.value!.data[i].data
+  ;(chartOption.legend as any).data = res.data.map(({ name }) => name)
+  for (let i = 0; i < res.data.length; i++) {
+    ;(chartOption.series as any)[i].name = res.data[i].name
+    ;(chartOption.series as any)[i].data = res.data[i].data
   }
   return chartOption
 }

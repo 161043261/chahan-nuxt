@@ -18,11 +18,10 @@ const RecursiveChild = defineComponent(
       router.push(url)
     }
     const Icon: Component | undefined = name2icon.get(props.item.icon)
-
     return () => (
       <div>
         {props.item.children ? (
-          <div class="flex justify-between gap-[50px]">
+          <div class="flex justify-between gap-[70px]">
             {props.item.children.map((child) => (
               <RecursiveChild key={child.url} item={child} />
             ))}

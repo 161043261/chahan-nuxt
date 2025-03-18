@@ -15,6 +15,7 @@ import toast from '~/utils/toast'
 
 const userState = useUserState()
 const { menuList } = userState
+console.log(menuList)
 
 const chartRef = ref<HTMLDivElement | null>(null)
 const chartRef2 = ref<HTMLDivElement | null>(null)
@@ -69,11 +70,11 @@ const animatedIdx = ref(0)
  * @param callbacks (多个) 回调函数
  * @description 节流 throttle
  */
-const handleClick = (idx: 0 | 1 | 2, callbacks: (() => void)[]) => {
+const handleClick = async (idx: 0 | 1 | 2, callbacks: (() => void)[]) => {
   if (timer) {
     return
   }
-
+  // const { default: toast } = await import('~/utils/toast')
   // proxy?.$toast.default('请等待')
   toast.default('请等待')
 
@@ -105,7 +106,7 @@ provide('virtualListSize' /** key */, virtualListSize /** value */)
           <template #header>
             <h1 class="text-[20px]">快捷方式</h1>
           </template>
-          <div class="flex justify-center gap-[60px]">
+          <div class="flex justify-center gap-[80px]">
             <RecursiveChild v-for="item of menuList" :key="item.url" :item="item" />
           </div>
         </ElCard>

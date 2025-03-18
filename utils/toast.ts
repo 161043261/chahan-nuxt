@@ -10,7 +10,7 @@ export function createToast():
     }
   | undefined {
   if (!document) {
-    return
+    return // Server Side
   }
   // 创建容器 (document.body)
   const container = document.body

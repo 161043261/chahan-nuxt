@@ -1,8 +1,8 @@
 import { Attention, Caution, CheckOne, CloseOne } from '@icon-park/vue-next'
 import { defineComponent, onBeforeUnmount, ref, Transition } from 'vue'
-import './toast.module.scss'
+import transition from './transition.module.scss'
 
-interface Props {
+interface IProps {
   message: string
   type: 'success' | 'error' | 'warning' | 'default'
   duration: number //! duration >= 500 && duration <= 2500, default 1500
@@ -71,7 +71,7 @@ interface Props {
 
 // export default defineComponent(() => () => <></>)
 export default defineComponent(
-  (props: Props, ctx /** { attrs, slots, emit, expose } */) => {
+  (props: IProps, ctx /** { attrs, slots, emit, expose } */) => {
     const isAlive = ref(false)
     let timer: number | null | NodeJS.Timeout = null
 
@@ -99,7 +99,13 @@ export default defineComponent(
     ctx.expose({ mount, isAlive })
     return () => (
       <div>
-        <Transition name="fade">
+        <Transition
+          name="fade"
+          enterActiveClass={transition['fade-enter-active']}
+          leaveActiveClass={transition['fade-leave-active']}
+          enterFromClass={transition['fade-enter-from']}
+          leaveToClass={transition['fade-leave-to']}
+        >
           {isAlive.value ? (
             <div class="border-1st z-100 fixed left-[50%] top-[10%] -translate-x-[50%] rounded-lg border-[3px] p-[5px]">
               <div class="flex items-center gap-[5px]">
@@ -121,7 +127,7 @@ export default defineComponent(
               </div>
             </div>
           ) : (
-            <></>
+            ''
           )}
         </Transition>
       </div>
