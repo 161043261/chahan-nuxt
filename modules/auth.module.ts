@@ -1,6 +1,7 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import type { Nuxt } from 'nuxt/schema'
 import { sha256 } from 'ohash'
+import { WHITE_LIST } from '~/constants'
 
 //////////////////////////////////////////////////
 import { fileURLToPath } from 'node:url'
@@ -16,18 +17,16 @@ if (import.meta.dev) {
 }
 //////////////////////////////////////////////////
 
-type WhiteList = ['/login', '/register']
-
 export interface ModuleOptions {
   secretKey: string
-  whitelist: Array<WhiteList[number]>
+  whitelist: string[]
 }
 
 export default defineNuxtModule<ModuleOptions>({
   defaults: {
     // auth.secretKey 必须是长度为 32 的字符串
     secretKey: sha256(`${Date.now() + Math.random()}`).slice(0, 32),
-    whitelist: ['/login', '/register'] as WhiteList,
+    whitelist: WHITE_LIST,
   },
 
   async setup(moduleOptions: ModuleOptions, nuxt: Nuxt) {

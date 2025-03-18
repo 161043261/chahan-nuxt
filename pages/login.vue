@@ -7,6 +7,7 @@ import type { Res } from '~/types/resp'
 // macros
 definePageMeta({
   layout: false, // 不使用布局
+  // layout: 'default', // 使用默认布局
 })
 
 // const emit = defineEmits(['update:modelValue'])

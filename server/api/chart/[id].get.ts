@@ -14,9 +14,9 @@ export default defineEventHandler(async (event) => {
       return {
         msg: '获取营收比例成功',
         data: [
-          { name: '炒饭A', data: randNum(1, 100) },
-          { name: '炒饭B', data: randNum(1, 100) },
-          { name: '炒饭C', data: randNum(1, 100) },
+          { name: '炒饭A', value: randNum(1, 100) },
+          { name: '炒饭B', value: randNum(1, 100) },
+          { name: '炒饭C', value: randNum(1, 100) },
         ],
       } as Res<ChartData>
 

@@ -47,8 +47,9 @@ const getChartOption = async () => {
       },
     },
   }
+  console.log(res.value?.data)
   for (let i = 0; i < (res.value?.data.length ?? 0); i++) {
-    ;(chartOption.series as any)[0].data = res.value!.data[i]
+    ;(chartOption.series as any)[0].data = res.value!.data
   }
   return chartOption
 }

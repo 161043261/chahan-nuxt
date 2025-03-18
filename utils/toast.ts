@@ -1,12 +1,17 @@
 import ToastIndex from '~/components/toast/toast_index'
 import { createVNode, render } from 'vue'
 
-export function createToast(): {
-  default: (message: string, duration?: number) => void
-  success: (message: string, duration?: number) => void
-  warning: (message: string, duration?: number) => void
-  error: (message: string, duration?: number) => void
-} {
+export function createToast():
+  | {
+      default: (message: string, duration?: number) => void
+      success: (message: string, duration?: number) => void
+      warning: (message: string, duration?: number) => void
+      error: (message: string, duration?: number) => void
+    }
+  | undefined {
+  if (!document) {
+    return
+  }
   // 创建容器 (document.body)
   const container = document.body
 
