@@ -1,3 +1,6 @@
+//! useState<T>(init?: () => T | Ref<T>): Ref<T>
+//! useState<T>(key: string, init?: () => T | Ref<T>): Ref<T>
+
 import { onMounted, onUnmounted, type Ref } from 'vue'
 import echarts, { type ECOption } from '~/utils/echarts'
 import { LineChart } from 'echarts/charts'

@@ -1,4 +1,4 @@
-import { NuxtLayout, NuxtPage } from "#components";
+import { NuxtLayout, NuxtPage } from '#components'
 
 export default defineComponent(() => () => (
   <NuxtLayout>

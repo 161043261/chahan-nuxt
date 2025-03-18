@@ -1,8 +1,8 @@
 <script lang="tsx" setup>
 import { ElCol, ElRow, ElCard, ElTimeline, ElTimelineItem } from 'element-plus'
-import { useUserState } from '~/composables/useUser.state'
+import { useUserState } from '~/composables/use_user.state'
 import RecursiveChild from '~/components/dashboard/recursive_child'
-import { useChart } from '~/composables/useChart'
+import { useChart } from '~/composables/use_chart'
 import getChartOption from './chart_option'
 import getChartOption2 from './chart_option2'
 import getChartOption3 from './chart_option3'

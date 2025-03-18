@@ -15,7 +15,7 @@ export default <Partial<Config>>{
         '7th': '#a1e3f9',
         '8th': '#d1f8ef',
       },
-    }
+    },
   },
   plugins: [],
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Lock, Rice, User } from '@icon-park/vue-next'
 import { ElButton, ElForm, ElFormItem, ElInput, ElMessage, type FormRules } from 'element-plus'
-import { useUserState } from '~/composables/useUser.state'
+import { useUserState } from '~/composables/use_user.state'
 import type { Res } from '~/types/resp'
 
 // macros
