@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { ECOption } from '@/utils/echarts'
+import type { ECOption } from '~/utils/echarts'
 import type { ChartData2 } from '~/types/chart'
 import type { Res } from '~/types/resp'
 

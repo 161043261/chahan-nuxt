@@ -85,9 +85,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxt/content',
     '@nuxt/eslint',
-    '@nuxtjs/mdc',
     '@nuxtjs/tailwindcss',
     '@element-plus/nuxt',
     'nuxt-mongoose',

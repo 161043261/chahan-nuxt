@@ -13,10 +13,10 @@ export async function useSessionManager(event: H3Event, token?: string) {
   if (token) {
     await session.update({ token })
   }
-  // session.data: { token: '' }
-  // console.log('session.data', session.data)
+  // console.log("session.data:", session.data)
+  //! session.data: { token: '' }
   return {
     ...session,
-    data: session.data as IAuthPayload, // { username?: string }
+    data: session.data as IAuthPayload, // { token: string }
   }
 }

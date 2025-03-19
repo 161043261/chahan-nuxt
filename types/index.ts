@@ -9,7 +9,7 @@ export interface IAuthPayload extends JWTPayload {
   // nbf?: number            // JWT Not Before
   // exp?: number            // JWT Expiration Time
   // iat?: number            // JWT Issued At
-  username?: string
+  token?: string
 }
 
 export interface IUser {

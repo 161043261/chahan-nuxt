@@ -8,17 +8,19 @@ import bus from '~/utils/bus'
 export default defineComponent(
   (props, ctx) => {
     const watermarked = ref(false)
-
     const tabContainerRef = useTemplateRef<InstanceType<typeof ElMain>>('tabContainerRef')
-    bus.subscribe('store-scrollTop', () => {
-      sessionStorage.setItem('scroll-top', tabContainerRef.value?.$el.scrollTop.toString())
-      tabContainerRef.value!.$el.scrollTop = 0
-    })
-    bus.subscribe('set-scrollTop', () => {
-      tabContainerRef.value!.$el.scrollTop = Number.parseFloat(
-        sessionStorage.getItem('scroll-top')!,
-      )
-    })
+
+    if (import.meta.client) {
+      bus.subscribe('store-scrollTop', () => {
+        sessionStorage.setItem('scroll-top', tabContainerRef.value?.$el.scrollTop.toString())
+        tabContainerRef.value!.$el.scrollTop = 0
+      })
+      bus.subscribe('set-scrollTop', () => {
+        tabContainerRef.value!.$el.scrollTop = Number.parseFloat(
+          sessionStorage.getItem('scroll-top')!,
+        )
+      })
+    }
 
     const { slots } = ctx
     return () => (
