@@ -23,7 +23,7 @@ export default defineComponent({
       const idx = tabState.findTab(url as string)
       tabState.removeTab(idx)
       if (tabList.value.length === 0) {
-        router.push({ name: 'Home' })
+        router.push('/')
         return
       }
       if (tabList.value.length === idx) {

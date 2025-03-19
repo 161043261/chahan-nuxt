@@ -13,16 +13,18 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (whitelist.includes(to.path)) {
     return
   }
-  // 客户端, 不在白名单, 未登录
-  if (import.meta.client && !sessionStorage.getItem('token')) {
-    return navigateTo('/login')
-  }
-  // 已登录, 但 cookie 异常
-  if (!username.value || !menuList.value) {
+
+  if (
+    // 不在白名单, 客户端, 未登录
+    (import.meta.client && !sessionStorage.getItem('token')) ||
+    // 已登录, 但 cookie 异常
+    !username.value ||
+    !menuList.value
+  ) {
     return navigateTo('/login')
   }
 
-  if (to.path === '/') {
+  if (import.meta.client && to.path === '/') {
     return navigateTo('/empty')
   }
   const tabState = useTabState()

@@ -11,7 +11,7 @@ export default defineComponent(() => {
   const { menuList } = userState
   const route = useRoute()
   const router = useRouter()
-  const handleClick = () => router.push({ name: 'Home' })
+  const handleClick = () => router.push('/')
   return () => (
     <div>
       <div

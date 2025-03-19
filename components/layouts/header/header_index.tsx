@@ -47,12 +47,12 @@ export default defineComponent({
     const handleCommand = async (command: Command) => {
       switch (command) {
         case Command.User:
-          // router.push({ name: 'User' })
+          // router.push('/user')
           break
 
         case Command.Logout:
           userState.logout()
-          router.replace({ name: 'Login' })
+          router.replace('/login')
       }
     }
 

@@ -87,9 +87,6 @@ function reset() {
 }
 
 async function logout() {
-  await $fetch('/api/user/logout', {
-    method: 'DELETE',
-  })
   reset()
 }
 
