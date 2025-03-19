@@ -13,18 +13,19 @@ const _useUserState = () => {
     'user', // key
     () => {
       //! sessionStorage is not defined
-      const username = import.meta.client ? (sessionStorage.getItem('username') ?? '') : ''
-      // 菜单
-      const menuList = (
-        import.meta.client ? JSON.parse(sessionStorage.getItem('menuList') ?? '[]') : []
-      ) as IMenuItem[]
-      // token
-      const token = import.meta.client ? (sessionStorage.getItem('auth') ?? '') : ''
+      // const username = import.meta.client ? (sessionStorage.getItem('username') ?? '') : ''
+      // const menuList = (
+      //   import.meta.client ? JSON.parse(sessionStorage.getItem('menuList') ?? '[]') : []
+      // ) as IMenuItem[]
+      // const token = import.meta.client ? (sessionStorage.getItem('auth') ?? '') : ''
 
+      const username = useCookie<string>('username')
+      const menuList = useCookie<IMenuItem[]>('menuList')
+      const token = useCookie<string>('token')
       return {
-        username,
-        menuList,
-        token,
+        username: username.value,
+        menuList: menuList.value,
+        token: token.value,
       }
     }, // initializer
   )
@@ -32,11 +33,15 @@ const _useUserState = () => {
 
 async function login(data: ILoginBody) {
   try {
-    const res = (await $fetch('/api/user/login', {
+    //! Component is already mounted, please use $fetch instead.
+    const res = await $fetch<Res<{ token: string; menuList: IMenuItem[] }>>('/api/user/login', {
       body: data,
       method: 'POST',
-      headers: [],
-    })) as Res<{ token: string; menuList: IMenuItem[] }>
+    })
+
+    if (!res) {
+      throw createError({ message: '登录失败' })
+    }
     const {
       data: { menuList: menuList_, token: token_ },
     } = res
@@ -44,16 +49,20 @@ async function login(data: ILoginBody) {
     _useUserState().value.menuList = menuList_
     _useUserState().value.token = token_
 
-    ////////////////////////////////////////////////
-    const token = useCookie<string>('user_state_token')
+    ///////////////////////////////////////////////////
+    const username = useCookie<string>('username')
+    const menuList = useCookie<IMenuItem[]>('menuList')
+    const token = useCookie<string>('token')
+    username.value = data.username
+    menuList.value = menuList_
     token.value = token_
-    ////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
 
-    if (import.meta.client) {
-      sessionStorage.setItem('username', data.username)
-      sessionStorage.setItem('menuList', JSON.stringify(menuList_))
-      sessionStorage.setItem('token', token_)
-    }
+    // if (import.meta.client) {
+    //   sessionStorage.setItem('username', data.username)
+    //   sessionStorage.setItem('menuList', JSON.stringify(menuList_))
+    //   sessionStorage.setItem('token', token_)
+    // }
   } catch (err) {
     if (import.meta.dev) {
       console.error(err)
@@ -67,9 +76,12 @@ function reset() {
     menuList: [],
     token: '',
   }
-  if (import.meta.client) {
-    sessionStorage.clear()
-  }
+  // if (import.meta.client) {
+  //   sessionStorage.clear()
+  // }
+  useCookie<string>('username').value = ''
+  useCookie<IMenuItem[]>('menuList').value = []
+  useCookie<string>('token').value = ''
 }
 
 async function logout() {
@@ -83,16 +95,24 @@ export function useUserState() {
   const userState = _useUserState()
   return {
     loggedIn: computed(() => Boolean(userState.value.token)),
-    username: computed(() =>
-      import.meta.client ? sessionStorage.getItem('username') : userState.value.username,
+    username: computed(
+      () =>
+        // import.meta.client ? sessionStorage.getItem('username') : userState.value.username,
+
+        userState.value.username ?? useCookie('username').value,
     ),
-    menuList: computed(() =>
-      import.meta.client
-        ? JSON.parse(sessionStorage.getItem('menuList') ?? '[]')
-        : userState.value.menuList,
+    menuList: computed(
+      () =>
+        // import.meta.client
+        //   ? JSON.parse(sessionStorage.getItem('menuList') ?? '[]')
+        //   : userState.value.menuList,
+
+        userState.value.menuList ?? useCookie('menuList').value,
     ),
-    token: computed(() =>
-      import.meta.client ? sessionStorage.getItem('token') : userState.value.token,
+    token: computed(
+      () =>
+        // import.meta.client ? sessionStorage.getItem('token') : userState.value.token,
+        userState.value.token ?? useCookie('token').value,
     ),
     login,
     reset,

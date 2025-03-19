@@ -6,8 +6,9 @@ const { auth } = useRuntimeConfig()
 
 export async function useSessionManager(event: H3Event, token?: string) {
   const session = await useSession(event, {
-    // auth.secretKey 必须是长度为 32 的字符串
-    password: auth.secretKey,
+    // auth.password 必须是长度为 32 的字符串
+    //
+    password: auth.password,
     name: 'authorization',
   })
   if (token) {

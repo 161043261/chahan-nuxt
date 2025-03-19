@@ -1,6 +1,6 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import type { Nuxt } from 'nuxt/schema'
-import { sha256 } from 'ohash'
+import { hash } from 'ohash'
 import { WHITE_LIST } from '~/constants'
 
 //////////////////////////////////////////////////
@@ -18,14 +18,14 @@ if (import.meta.dev) {
 //////////////////////////////////////////////////
 
 export interface ModuleOptions {
-  secretKey: string
+  password: string
   whitelist: string[]
 }
 
 export default defineNuxtModule<ModuleOptions>({
   defaults: {
-    // auth.secretKey 必须是长度为 32 的字符串
-    secretKey: sha256(`${Date.now() + Math.random()}`).slice(0, 32),
+    // auth.password 必须是长度为 32 的字符串
+    password: hash(`${Date.now() + Math.random()}`).slice(0, 32),
     whitelist: WHITE_LIST,
   },
 
@@ -33,7 +33,7 @@ export default defineNuxtModule<ModuleOptions>({
     const runtimeConfig = nuxt.options.runtimeConfig
 
     runtimeConfig.auth = {
-      secretKey: moduleOptions.secretKey,
+      password: moduleOptions.password,
       whitelist: moduleOptions.whitelist,
     }
     runtimeConfig.public.whitelist = moduleOptions.whitelist

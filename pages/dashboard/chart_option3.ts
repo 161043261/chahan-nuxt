@@ -6,7 +6,7 @@ import type { ChartData3 } from '~/types/chart'
 import type { Res } from '~/types/resp'
 
 const getChartOption3 = async () => {
-  const res = await $fetch/** useFetch */ <Res<ChartData3>>('/api/chart/3')
+  const res = await $fetch<Res<ChartData3>>('/api/chart/3')
   const chartOption: ECOption = {
     radar: {
       shape: 'circle',

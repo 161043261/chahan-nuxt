@@ -1,7 +1,7 @@
 export interface IRevenueItem {
   id: number
   address: string
-  revenue?: number
+  revenue: number
 }
 
 export interface ITimeLineItem {

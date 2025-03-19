@@ -21,10 +21,9 @@ export default defineComponent(
     const virtualListSize = inject<Ref<number>>('virtualListSize', ref(0) /** defaultVal */)
     // watchEffect(() => console.log(virtualListSize.value))
 
-    const { data: res } = await useFetch<Res<T[]>>(props.largeListUrl, {
-      watch: [() => props.largeListUrl],
-    })
-    const largeList = ref(res.value?.data ?? [])
+    const res = await $fetch<Res<T[]>>(props.largeListUrl)
+
+    const largeList = ref(res?.data ?? [])
     virtualListSize.value = largeList.value.length
 
     // 可视区子项数量

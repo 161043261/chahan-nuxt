@@ -4,11 +4,11 @@ import { useRuntimeConfig } from '#imports'
 
 const { auth } = useRuntimeConfig()
 
-// auth.secretKey 必须是长度为 32 的字符串
-const uint8ArrayKey: Uint8Array = new TextEncoder().encode(auth.secretKey)
+// auth.password 必须是长度为 32 的字符串
+const uint8ArrayKey: Uint8Array = new TextEncoder().encode(auth.password)
 
 /**
- * @description 使用 auth.secretKey 对 token 签名
+ * @description 使用 auth.password 对 token 签名
  */
 export function createJwt(username: string) {
   return new SignJWT({ username })

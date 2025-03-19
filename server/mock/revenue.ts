@@ -9,6 +9,7 @@ export function mockRevenueList(amount: number): {
       {
         'id|+1': 1,
         address: '@county(true)',
+        revenue: '@integer(1000000, 1000000000)',
       },
     ],
   })

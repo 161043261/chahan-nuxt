@@ -15,7 +15,6 @@ import toast from '~/utils/toast'
 
 const userState = useUserState()
 const { menuList } = userState
-console.log(menuList)
 
 const chartRef = ref<HTMLDivElement | null>(null)
 const chartRef2 = ref<HTMLDivElement | null>(null)
