@@ -12,20 +12,21 @@ const _useUserState = () => {
   return useState(
     'user', // key
     () => {
+      const username = useCookie<string>('username')
+      const menuList = useCookie<IMenuItem[]>('menuList')
+      // const token = useCookie<string>('token')
+
       //! sessionStorage is not defined
       // const username = import.meta.client ? (sessionStorage.getItem('username') ?? '') : ''
       // const menuList = (
       //   import.meta.client ? JSON.parse(sessionStorage.getItem('menuList') ?? '[]') : []
       // ) as IMenuItem[]
-      // const token = import.meta.client ? (sessionStorage.getItem('auth') ?? '') : ''
+      const token = import.meta.client ? (sessionStorage.getItem('auth') ?? '') : ''
 
-      const username = useCookie<string>('username')
-      const menuList = useCookie<IMenuItem[]>('menuList')
-      const token = useCookie<string>('token')
       return {
         username: username.value,
         menuList: menuList.value,
-        token: token.value,
+        token: token,
       }
     }, // initializer
   )
@@ -52,17 +53,17 @@ async function login(data: ILoginBody) {
     ///////////////////////////////////////////////////
     const username = useCookie<string>('username')
     const menuList = useCookie<IMenuItem[]>('menuList')
-    const token = useCookie<string>('token')
+    // const token = useCookie<string>('token')
     username.value = data.username
     menuList.value = menuList_
-    token.value = token_
+    // token.value = token_
     ///////////////////////////////////////////////////
 
-    // if (import.meta.client) {
-    //   sessionStorage.setItem('username', data.username)
-    //   sessionStorage.setItem('menuList', JSON.stringify(menuList_))
-    //   sessionStorage.setItem('token', token_)
-    // }
+    if (import.meta.client) {
+      //   sessionStorage.setItem('username', data.username)
+      //   sessionStorage.setItem('menuList', JSON.stringify(menuList_))
+      sessionStorage.setItem('token', token_)
+    }
   } catch (err) {
     if (import.meta.dev) {
       console.error(err)
@@ -76,12 +77,13 @@ function reset() {
     menuList: [],
     token: '',
   }
-  // if (import.meta.client) {
-  //   sessionStorage.clear()
-  // }
   useCookie<string>('username').value = ''
   useCookie<IMenuItem[]>('menuList').value = []
-  useCookie<string>('token').value = ''
+  // useCookie<string>('token').value = ''
+
+  if (import.meta.client) {
+    sessionStorage.clear()
+  }
 }
 
 async function logout() {
@@ -94,25 +96,11 @@ async function logout() {
 export function useUserState() {
   const userState = _useUserState()
   return {
-    loggedIn: computed(() => Boolean(userState.value.token)),
-    username: computed(
-      () =>
-        // import.meta.client ? sessionStorage.getItem('username') : userState.value.username,
-
-        userState.value.username ?? useCookie('username').value,
-    ),
-    menuList: computed(
-      () =>
-        // import.meta.client
-        //   ? JSON.parse(sessionStorage.getItem('menuList') ?? '[]')
-        //   : userState.value.menuList,
-
-        userState.value.menuList ?? useCookie('menuList').value,
-    ),
-    token: computed(
-      () =>
-        // import.meta.client ? sessionStorage.getItem('token') : userState.value.token,
-        userState.value.token ?? useCookie('token').value,
+    username: useCookie<string>('username'),
+    menuList: useCookie<IMenuItem[]>('menuList'),
+    token: ref(
+      import.meta.client ? sessionStorage.getItem('token') : userState.value.token,
+      // userState.value.token ?? useCookie('token').value,
     ),
     login,
     reset,
