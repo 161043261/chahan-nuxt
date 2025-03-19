@@ -1,6 +1,5 @@
 //! useState<T>(init?: () => T | Ref<T>): Ref<T>
 //! useState<T>(key: string, init?: () => T | Ref<T>): Ref<T>
-
 import type { IMenuItem } from '~/types/user'
 
 // 省略 children 属性的 IMenuItem 类型

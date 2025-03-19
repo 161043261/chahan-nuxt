@@ -6,8 +6,8 @@ interface IProps {
 export default defineComponent(
   (props: IProps) => {
     const { error } = toRefs(props)
-    const handleError = () => {
-      clearError({ redirect: '/' })
+    const handleClick = () => {
+      clearError({ redirect: '/login' })
     }
 
     return () => (
@@ -19,7 +19,12 @@ export default defineComponent(
         {/* 可以在 data 中设置自定义字段 */}
         <p>data: {JSON.stringify(error.value?.data ?? 'unknown')}</p>
         <p>cause: {JSON.stringify(error.value?.cause ?? 'unknown')}</p>
-        <button onClick={handleError}>handleError</button>
+        <button
+          onClick={handleClick}
+          class="rounded-xl border-[3px] border-6th p-[9px] hover:bg-6th"
+        >
+          clearError
+        </button>
       </div>
     )
   },

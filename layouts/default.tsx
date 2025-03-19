@@ -1,8 +1,8 @@
 import { ElAside, ElContainer, ElHeader, ElMain } from 'element-plus'
 import { defineComponent } from 'vue'
-import AsideMenu from '~/components/default_layout/aside/aside_menu'
-import HeaderIndex from '~/components/default_layout/header/header_index'
-import LayoutTab from '~/components/default_layout/layout_tab'
+import AsideMenu from '~/components/layouts/aside/aside_menu'
+import HeaderIndex from '~/components/layouts/header/header_index'
+import LayoutTab from '~/components/layouts/layout_tab'
 import bus from '~/utils/bus'
 
 export default defineComponent(

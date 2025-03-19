@@ -1,4 +1,4 @@
-export const WHITE_LIST = ['/login', '/register', '/empty']
+export const WHITE_LIST = ['/login', '/register']
 
 export const ROBOT_STATES = [
   '全部' /** 0 */,

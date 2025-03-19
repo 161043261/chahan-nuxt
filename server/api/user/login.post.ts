@@ -27,7 +27,6 @@ export default defineEventHandler(async (event: H3Event) => {
   }
   const token = await setAuth(event, user.username)
 
-  ////////////////////////
   return {
     msg: '登录成功',
     data: {

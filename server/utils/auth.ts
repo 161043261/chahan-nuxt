@@ -11,8 +11,7 @@ import { getDate, getTime } from '~/utils'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 if (import.meta.dev) {
-  console.log('__filename:', __filename)
-  console.log('__dirname:', __dirname)
+  console.log('[~/server/utils/auth.ts] __dirname:', __dirname)
 }
 //////////////////////////////////////////////////
 

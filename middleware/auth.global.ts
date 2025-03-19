@@ -5,23 +5,27 @@ import { getTime } from '~/utils'
 export default defineNuxtRouteMiddleware((to, from) => {
   console.log(`[${getTime()}]`, to.path, '<==', from.path)
   const whitelist = useRuntimeConfig().public.whitelist
-  const { username, token } = useUserState()
+  const { username, menuList, token } = useUserState()
   if (import.meta.dev) {
-    console.log('username:', username, ', token:', token)
+    console.log('username:', username.value, ', token:', token?.value)
   }
 
+  if (whitelist.includes(to.path)) {
+    return
+  }
   // 客户端, 不在白名单, 未登录
-  if (import.meta.client && !whitelist.includes(to.path) && !sessionStorage.getItem('token')) {
+  if (import.meta.client && !sessionStorage.getItem('token')) {
+    return navigateTo('/login')
+  }
+  // 已登录, 但 cookie 异常
+  if (!username.value || !menuList.value) {
     return navigateTo('/login')
   }
 
   if (to.path === '/') {
-    return navigateTo('/dashboard')
+    return navigateTo('/empty')
   }
-
-  const userState = useUserState()
   const tabState = useTabState()
-  const { menuList } = userState
   const { addTab } = tabState
   const item = menuList.value.find((item) => item.url === to.path)
   if (item) {

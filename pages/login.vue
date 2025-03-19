@@ -47,7 +47,7 @@ const handleLogin = () => {
     try {
       await userState.login(formData)
       ElMessage.success({ message: '登录成功', grouping: true })
-      router.push('/dashboard')
+      router.push('/')
     } catch (err) {
       if (import.meta.dev) {
         console.error(err)
