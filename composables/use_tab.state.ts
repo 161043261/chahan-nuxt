@@ -6,7 +6,7 @@ import type { IMenuItem } from '~/types/user'
 type ITabItem = Omit<IMenuItem, 'children'>
 
 const _useTabState = () => {
-  return useState('tab', () => {
+  return useState<ITabItem[]>('tab', () => {
     return [] as ITabItem[] // tabList
   })
 }

@@ -9,7 +9,11 @@ import type { ILoginBody, IMenuItem } from '~/types/user'
 
 // 必须使用高阶函数
 const _useUserState = () => {
-  return useState(
+  return useState<{
+    username: string
+    menuList: IMenuItem[]
+    token: string
+  }>(
     'user', // key
     () => {
       const username = useCookie<string>('username')
