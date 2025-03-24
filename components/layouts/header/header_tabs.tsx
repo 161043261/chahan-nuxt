@@ -1,7 +1,7 @@
 import './header_tabs.scss'
 
 import { useTabState } from '~/composables/use_tab.state'
-import { ElTabs, ElTabPane, type TabsPaneContext, type TabPaneName, ElDivider } from 'element-plus'
+import { ElTabs, ElTabPane, type TabsPaneContext, type TabPaneName } from 'element-plus'
 
 import { name2icon } from '~/utils/icons'
 import { useRoute, useRouter } from 'vue-router'
@@ -100,10 +100,16 @@ export default defineComponent({
           leaveActiveClass="animate__animated animate__flipOutX"
         >
           {isAlive.value ? (
-            <ul class="ctx-menu fixed z-10 rounded-lg bg-slate-100 text-slate-500 shadow-lg">
+            <ul
+              class={`ctx-menu fixed z-10 w-[150px] rounded-lg bg-slate-100 text-slate-500 shadow-lg !left-[${ctxMenuX.value}] !top-[${ctxMenuY.value}]`}
+              style={{
+                left: ctxMenuX.value,
+                right: ctxMenuY.value,
+              }}
+            >
               <li>选择关闭方式</li>
               <li>
-                <ElDivider />
+                <hr />
               </li>
               <li onClick={removeAll}>关闭所有标签页</li>
             </ul>

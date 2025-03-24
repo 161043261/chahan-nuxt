@@ -15,4 +15,4 @@ const _useRobotState = () => {
   )
 }
 
-function setRowData(newRowData: IRobotData) {}
+// function setRowData(newRowData: IRobotData) {}
